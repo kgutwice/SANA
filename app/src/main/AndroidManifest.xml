@@ -19,9 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddSubject" />
+        <activity android:name=".AddSchedule" />
         <activity android:name=".SanaCalendar" />
-        <activity android:name=".ScheduleList"></activity>
+        <activity android:name=".ScheduleList" />
+        <activity android:name=".SubjectList"></activity>
     </application>
 
 </manifest>
