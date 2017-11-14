@@ -2,8 +2,6 @@ package soen.kgutwice.sana;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.add_schedule) {
-            Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
+            Intent intent = new Intent(getApplicationContext(), AddSubject.class);
             startActivity(intent);
             return true;
         }
