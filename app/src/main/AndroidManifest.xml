@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddSchedule" />
-        <activity android:name=".SanaCalendar"></activity>
+        <activity android:name=".SanaCalendar" />
+        <activity android:name=".ScheduleList"></activity>
     </application>
 
 </manifest>
