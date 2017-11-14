@@ -2,8 +2,6 @@ package soen.kgutwice.sana;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -79,8 +77,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.add_schedule) {
-            Intent intent = new Intent(getApplicationContext(), AddSchedule.class);
+        if (id == R.id.subject_list) {
+            Intent intent = new Intent(getApplicationContext(), SubjectList.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.add_schedule){
+            Intent intent = new Intent(getApplicationContext(), ScheduleList.class);
             startActivity(intent);
             return true;
         }
@@ -101,10 +103,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
