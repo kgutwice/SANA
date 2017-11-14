@@ -15,15 +15,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        />
+        tools:layout_editor_absoluteY="0dp" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignEnd="@+id/calendarView"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/calendarView" />
+        android:layout_alignRight="@+id/calendarView"
+        android:layout_below="@+id/calendarView"
+        android:id="@+id/listView" />
 
     <Button
         android:id="@+id/listButton"
@@ -31,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/calendarView"
-        android:layout_toEndOf="@+id/calendarView"
-        android:layout_toRightOf="@+id/calendarView"
+        android:layout_toEndOf="@+id/listView"
+        android:layout_toRightOf="@+id/listView"
         android:text="Button" />
 
 </RelativeLayout>
