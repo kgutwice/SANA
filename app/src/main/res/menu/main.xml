@@ -6,9 +6,4 @@
         android:orderInCategory="100"
         android:title="@string/subject_list"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/add_schedule"
-        android:orderInCategory="100"
-        android:title="@string/add_schedule"
-        app:showAsAction="never" />
 </menu>

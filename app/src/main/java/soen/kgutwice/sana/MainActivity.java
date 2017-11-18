@@ -23,15 +23,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -46,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         listButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ScheduleList.class);
+                Intent intent = new Intent(getApplicationContext(), TodoList.class);
                 startActivity(intent);
             }
         });
@@ -79,10 +70,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.subject_list) {
             Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.add_schedule){
-            Intent intent = new Intent(getApplicationContext(), ScheduleList.class);
             startActivity(intent);
             return true;
         }
