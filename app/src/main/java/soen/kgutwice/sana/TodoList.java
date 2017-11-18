@@ -18,7 +18,7 @@ public class TodoList extends AppCompatActivity {
 
         String[] items = {"여", "기", "는", "한", "학", "기", "모", "든", "일", "정", "을", "보", "는", "곳", "입", "니", "다"};
         ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        ListView listView = (ListView)findViewById(R.id.listView);
+        ListView listView = (ListView)findViewById(R.id.semesterTodoListView);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(

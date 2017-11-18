@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/calendarView"
         android:layout_below="@+id/calendarView"
-        android:id="@+id/listView" />
+        android:id="@+id/todayTodoListView" />
 
     <Button
         android:id="@+id/listButton"
@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/calendarView"
-        android:layout_toEndOf="@+id/listView"
-        android:layout_toRightOf="@+id/listView"
+        android:layout_toEndOf="@+id/todayTodoListView"
+        android:layout_toRightOf="@+id/todayTodoListView"
         android:text="Button" />
 
 </RelativeLayout>

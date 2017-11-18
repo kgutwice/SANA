@@ -7,7 +7,7 @@
     tools:context="soen.kgutwice.sana.TodoList">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/semesterTodoListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

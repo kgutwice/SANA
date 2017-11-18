@@ -11,7 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +45,21 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        String[] items = {"여", "기", "는", "하", "루", "의", "모", "든", "일", "정", "을", "보", "는", "곳", "입", "니", "다"};
+        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        ListView listView = (ListView)findViewById(R.id.todayTodoListView);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int i, long id){
+                        Intent intent = new Intent(getApplicationContext(), ModifyTodo.class);
+                        startActivity(intent);
+                    }
+                }
+        );
     }
 
     @Override
