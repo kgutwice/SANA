@@ -16,7 +16,7 @@ public class TodoList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
 
-        String[] items = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"};
+        String[] items = {"여", "기", "는", "한", "학", "기", "모", "든", "일", "정", "을", "보", "는", "곳", "입", "니", "다"};
         ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
