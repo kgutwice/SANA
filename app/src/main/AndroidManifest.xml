@@ -22,7 +22,8 @@
         <activity android:name=".AddTodo" />
         <activity android:name=".SanaCalendar" />
         <activity android:name=".TodoList" />
-        <activity android:name=".SubjectList"></activity>
+        <activity android:name=".SubjectList" />
+        <activity android:name=".ModifyTodo"></activity>
     </application>
 
 </manifest>
