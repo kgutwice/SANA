@@ -17,8 +17,8 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="76dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="여기는 todo를 수정하는곳입니다."
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText2"

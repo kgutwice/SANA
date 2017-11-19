@@ -49,10 +49,12 @@ public class SubjectList extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.subject_list) {
-            Intent intent = new Intent(getApplicationContext(), SubjectList.class);
+        if (id == R.id.addSubject) {
+            Intent intent = new Intent(getApplicationContext(), AddSubject.class);
             startActivity(intent);
             return true;
+        } else if(id == R.id.addFromKutis){
+            // 이곳은 쿠티스와 연동하는 곳입니다.
         }
 
         return super.onOptionsItemSelected(item);

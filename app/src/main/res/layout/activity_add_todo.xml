@@ -35,8 +35,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="여기는 todo를 추가하는곳입니다."
+        android:inputType="textPersonName" />
 
     <RatingBar
         android:id="@+id/ratingBar"
