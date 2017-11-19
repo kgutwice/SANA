@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,29 +10,28 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignEnd="@+id/calendarView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/calendarView"
-        android:layout_below="@+id/calendarView"
-        android:id="@+id/todayTodoListView" />
-
-    <Button
-        android:id="@+id/listButton"
+        android:id="@+id/todayTodoListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/calendarView"
-        android:layout_toEndOf="@+id/todayTodoListView"
-        android:layout_toRightOf="@+id/todayTodoListView" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/listButton"
+        android:layout_width="30dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toRightOf="@+id/todayTodoListView"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/ic_menu_send" />
+
+</android.support.constraint.ConstraintLayout>
