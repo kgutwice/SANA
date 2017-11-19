@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/subject_list"
+        android:id="@+id/subjectList"
         android:orderInCategory="100"
         android:title="@string/subject_list"
         app:showAsAction="never" />
