@@ -34,7 +34,7 @@
         />
 
     <TextView
-        android:id="@+id/lectureDayOfTheWeek"
+        android:id="@+id/DayOfTheWeek"
         android:text="강의 요일"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,12 +47,12 @@
          />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/lectureDayOfTheWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/subjectProfessor"
         android:layout_marginTop="15dp"
-        app:layout_constraintStart_toEndOf="@+id/lectureDayOfTheWeek"
+        app:layout_constraintStart_toEndOf="@+id/DayOfTheWeek"
         android:layout_marginLeft="60dp"
         />
 
@@ -164,6 +164,5 @@
         app:layout_constraintTop_toBottomOf="@+id/takeClassYearandSemester"
         android:layout_marginTop="50dp"
         />
-
 
 </android.support.constraint.ConstraintLayout>
