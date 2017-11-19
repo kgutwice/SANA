@@ -4,15 +4,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="soen.kgutwice.sana.AddSubject">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="soen.kgutwice.sana.AddSubject"
+    >
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/subjectName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="과목명"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/subjectProfessor"
+        android:hint="담당 교수님"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/subjectName"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:inputType="textPersonName"
+        />
+
+    <TextView
+        android:id="@+id/lectureDayOfTheWeek"
+        android:text="강의 요일"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="과목명과 정보를 입력"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="50dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/subjectProfessor"
+        android:layout_marginTop="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+         />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/subjectProfessor"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@+id/lectureDayOfTheWeek"
+        android:layout_marginLeft="60dp"
+        />
+
+    <TextView
+        android:id="@+id/lectureTime"
+        android:text="강의 시간"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureDayOfTheWeek"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+         />
+
+    <Spinner
+        android:id="@+id/startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/lectureTime"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureDayOfTheWeek"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/swungDash"
+        android:text="~"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/startTime"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureDayOfTheWeek"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        />
+
+    <Spinner
+        android:id="@+id/endTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/startTime"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureDayOfTheWeek"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/takeClassYearandSemester"
+        android:text="수강 년도/학기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureTime"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        />
+
+    <Spinner
+        android:id="@+id/takeClassYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/lectureTime"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureTime"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/year"
+        android:text="년도"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/takeClassYear"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureTime"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        />
+
+    <Spinner
+        android:id="@+id/takeClassSemester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/takeClassYear"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureTime"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/semester"
+        android:text="학기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/takeClassSemester"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/lectureTime"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:text="과목 추가"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/takeClassYearandSemester"
+        android:layout_marginTop="50dp"
+        />
+
+
 </android.support.constraint.ConstraintLayout>

@@ -19,11 +19,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddTodo" />
-        <activity android:name=".TodoList" />
-        <activity android:name=".SubjectList" />
-        <activity android:name=".ModifyTodo" />
-        <activity android:name=".AddSubject"></activity>
+        <activity
+            android:name=".AddTodo"
+            android:label="@string/add_todo"
+            />
+        <activity
+            android:name=".TodoList"
+            android:label="@string/todo_list"
+            />
+        <activity
+            android:name=".SubjectList"
+            android:label="@string/subject_list"
+            />
+        <activity
+            android:name=".ModifyTodo"
+            android:label="@string/modify_todo"
+            />
+        <activity
+            android:name=".AddSubject"
+            android:label="@string/add_subject"
+            ></activity>
+
     </application>
 
 </manifest>

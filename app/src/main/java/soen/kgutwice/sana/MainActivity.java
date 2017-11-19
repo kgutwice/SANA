@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button listButton = (Button)findViewById(R.id.listButton);
+        ImageButton listButton = (ImageButton)findViewById(R.id.listButton);
 
         listButton.setOnClickListener(new View.OnClickListener(){
             @Override
