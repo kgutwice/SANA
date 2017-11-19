@@ -21,7 +21,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String userID;
+    public static String userID = "test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

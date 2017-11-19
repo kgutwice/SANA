@@ -8,13 +8,25 @@
     tools:context="soen.kgutwice.sana.AddSubject"
     >
 
+    <Button
+        android:id="@+id/submitButton"
+        android:text="저장"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="30dp"
+
+        />
+
     <EditText
         android:id="@+id/subjectName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:hint="과목명"
@@ -154,15 +166,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         />
 
-    <Button
-        android:id="@+id/submitButton"
-        android:text="과목 추가"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/takeClassYearandSemester"
-        android:layout_marginTop="50dp"
-        />
+
 
 </android.support.constraint.ConstraintLayout>
