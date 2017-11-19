@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="soen.kgutwice.sana">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    >
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,25 +23,22 @@
         </activity>
         <activity
             android:name=".AddTodo"
-            android:label="@string/add_todo"
-            />
+            android:label="@string/add_todo" />
         <activity
             android:name=".TodoList"
-            android:label="@string/todo_list"
-            />
+            android:label="@string/todo_list" />
+        <activity
+            android:name=".ModifyTodo"
+            android:label="@string/modify_todo" />
+        <activity
+            android:name=".AddSubject"
+            android:label="@string/add_subject" />
         <activity
             android:name=".SubjectList"
             android:label="@string/subject_list"
-            />
-        <activity
-            android:name=".ModifyTodo"
-            android:label="@string/modify_todo"
-            />
-        <activity
-            android:name=".AddSubject"
-            android:label="@string/add_subject"
-            ></activity>
+            >
 
+        </activity>
     </application>
 
 </manifest>
