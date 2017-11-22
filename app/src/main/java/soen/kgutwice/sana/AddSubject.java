@@ -79,7 +79,7 @@ public class AddSubject extends AppCompatActivity {
             public void onClick(View view) {
                 // 데이터 송신
 
-                parameters = new HashMap<String, String>();
+//                parameters = new HashMap<String, String>();
 
                 JSONObject jsonObject = new JSONObject();
                 try{
@@ -112,9 +112,10 @@ public class AddSubject extends AppCompatActivity {
                         }
                     }
                 };
-
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
-                    new Response.Listener<JSONObject>() {
+                Log.i("tt",jsonObject.toString());
+                AddSubjectRequest AddSubjectRequest = new AddSubjectRequest(jsonObject.toString() ,responseListener);
+                /*
+                new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
@@ -129,9 +130,9 @@ public class AddSubject extends AppCompatActivity {
                         VolleyLog.e("Error: ", error.getMessage());
                     }
                 });
-
+*/
                 RequestQueue queue = Volley.newRequestQueue(AddSubject.this);
-                queue.add(request);
+                queue.add(AddSubjectRequest);
             }
         });
     }
