@@ -16,10 +16,17 @@ public class AddSubjectRequest extends StringRequest {
 
     private Map<String, String> parameters;
 
-    public AddSubjectRequest(String datas, Response.Listener<String> listener){
+    public AddSubjectRequest(String userId, String subjectName, String subjectProfessor, String lectureDayOfTheWeek, String startTime, String endTime, String takeClassYear, String takeClassSemester, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
         parameters = new HashMap<>();
-        parameters.put("parameters", datas);
+        parameters.put("userID", userId);
+        parameters.put("subjectName", subjectName);
+        parameters.put("subjectProfessor", subjectProfessor);
+        parameters.put("lectureDayOfTheWeek", lectureDayOfTheWeek);
+        parameters.put("startTime", startTime);
+        parameters.put("endTime", endTime);
+        parameters.put("takeClassYear", takeClassYear);
+        parameters.put("takeClassSemester", takeClassSemester);
     }
 
     @Override

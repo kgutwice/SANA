@@ -1,11 +1,8 @@
 package soen.kgutwice.sana;
 
-
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,30 +10,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AddSubject extends AppCompatActivity {
-
-    final static String URL = "http://211.184.26.44:3000/";
-    private Map<String, String> parameters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subject);
+
+        final String userId = getIntent().getStringExtra("userId");
 
         final EditText editTextSubjectName = (EditText)findViewById(R.id.subjectName);
         final EditText editTextSubjectProfessor = (EditText)findViewById(R.id.subjectProfessor);
@@ -79,21 +67,15 @@ public class AddSubject extends AppCompatActivity {
             public void onClick(View view) {
                 // 데이터 송신
 
-//                parameters = new HashMap<String, String>();
+                String subjectName = editTextSubjectName.getText().toString();
+                String subjectProfessor = editTextSubjectProfessor.getText().toString();
+                String lectureDayOfTheWeek = spinnerLectureDayOfTheWeek.getSelectedItem().toString();
+                String startTime = spinnerStartTime.getSelectedItem().toString();
+                String endTime = spinnerEndTime.getSelectedItem().toString();
+                String takeClassYear = spinnerTakeClassYear.getSelectedItem().toString();
+                String takeClassSemester = spinnerTakeClassSemester.getSelectedItem().toString();
 
-                JSONObject jsonObject = new JSONObject();
-                try{
-                    jsonObject.put("userID", MainActivity.userID);
-                    jsonObject.put("subjectName", editTextSubjectName.getText().toString());
-                    jsonObject.put("subjectProfessor", editTextSubjectProfessor.getText().toString());
-                    jsonObject.put("lectureDayOfTheWeek", spinnerLectureDayOfTheWeek.getSelectedItem().toString());
-                    jsonObject.put("startTime", spinnerStartTime.getSelectedItem().toString());
-                    jsonObject.put("endTime", spinnerEndTime.getSelectedItem().toString());
-                    jsonObject.put("takeClassYear", spinnerTakeClassYear.getSelectedItem().toString());
-                    jsonObject.put("takeClassSemester", spinnerTakeClassSemester.getSelectedItem().toString());
-                } catch(JSONException e){
-                    e.printStackTrace();
-                }
+                Toast.makeText(getApplicationContext(), "sms2831" + subjectName + subjectProfessor + lectureDayOfTheWeek + startTime + endTime + takeClassYear + takeClassSemester, Toast.LENGTH_LONG).show();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>(){
                     @Override
@@ -112,27 +94,11 @@ public class AddSubject extends AppCompatActivity {
                         }
                     }
                 };
-                Log.i("tt",jsonObject.toString());
-                AddSubjectRequest AddSubjectRequest = new AddSubjectRequest(jsonObject.toString() ,responseListener);
-                /*
-                new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                VolleyLog.v("Response:%n %s", response.toString(4));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.e("Error: ", error.getMessage());
-                    }
-                });
-*/
+
+                AddSubjectRequest addSubjectRequest = new AddSubjectRequest("testid", subjectName, subjectProfessor, lectureDayOfTheWeek, startTime, endTime, takeClassYear, takeClassSemester, responseListener);
+
                 RequestQueue queue = Volley.newRequestQueue(AddSubject.this);
-                queue.add(AddSubjectRequest);
+                queue.add(addSubjectRequest);
             }
         });
     }
