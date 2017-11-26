@@ -24,7 +24,7 @@ public class AddSubject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subject);
 
-        final String userId = getIntent().getStringExtra("userId");
+        final String userID = getIntent().getStringExtra("userID");
 
         final EditText editTextSubjectName = (EditText)findViewById(R.id.subjectName);
         final EditText editTextSubjectProfessor = (EditText)findViewById(R.id.subjectProfessor);
@@ -75,7 +75,7 @@ public class AddSubject extends AppCompatActivity {
                 String takeClassYear = spinnerTakeClassYear.getSelectedItem().toString();
                 String takeClassSemester = spinnerTakeClassSemester.getSelectedItem().toString();
 
-                Toast.makeText(getApplicationContext(), "sms2831" + subjectName + subjectProfessor + lectureDayOfTheWeek + startTime + endTime + takeClassYear + takeClassSemester, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), userID + subjectName + subjectProfessor + lectureDayOfTheWeek + startTime + endTime + takeClassYear + takeClassSemester, Toast.LENGTH_LONG).show();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>(){
                     @Override
@@ -95,7 +95,7 @@ public class AddSubject extends AppCompatActivity {
                     }
                 };
 
-                AddSubjectRequest addSubjectRequest = new AddSubjectRequest("testid", subjectName, subjectProfessor, lectureDayOfTheWeek, startTime, endTime, takeClassYear, takeClassSemester, responseListener);
+                AddSubjectRequest addSubjectRequest = new AddSubjectRequest(userID, subjectName, subjectProfessor, lectureDayOfTheWeek, startTime, endTime, takeClassYear, takeClassSemester, responseListener);
 
                 RequestQueue queue = Volley.newRequestQueue(AddSubject.this);
                 queue.add(addSubjectRequest);

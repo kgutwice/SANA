@@ -20,7 +20,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String userId = "sms2831";
+    public static String userID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        userId = getIntent().getStringExtra("userId");
+        userID = getIntent().getStringExtra("userID");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.subjectList) {
             Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-            intent.putExtra("userId", userId);
+            intent.putExtra("userID", userID);
             startActivity(intent);
             return true;
         }

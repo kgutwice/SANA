@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class SubjectList extends AppCompatActivity {
 
-    String userId;
+    public static String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,8 @@ public class SubjectList extends AppCompatActivity {
         setContentView(R.layout.activity_subject_list);
 
         Intent intent = getIntent();
-        userId = intent.getStringExtra("userId");
-        Toast.makeText(getApplicationContext(), userId, Toast.LENGTH_LONG).show();
+        userID = intent.getStringExtra("userID");
+        Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
         String[] items = {"여", "기", "는", "과", "목", "리", "스", "트", "를", "출", "력", "합", "니", "다"};
         ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
@@ -58,7 +58,7 @@ public class SubjectList extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.addSubject) {
             Intent intent = new Intent(getApplicationContext(), AddSubject.class);
-            intent.putExtra("userId", userId);
+            intent.putExtra("userID", userID);
             startActivity(intent);
             return true;
         } else if(id == R.id.addFromKutis){

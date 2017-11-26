@@ -12,14 +12,14 @@ import java.util.Map;
 
 public class AddSubjectRequest extends StringRequest {
 
-    final static private String URL = "http://203.249.17.196:2013/ms/android/addLecture.php";
+    final static private String URL = "http://203.249.17.196:2013/ms/android/SANA_connector/addLecture.php";
 
     private Map<String, String> parameters;
 
-    public AddSubjectRequest(String userId, String subjectName, String subjectProfessor, String lectureDayOfTheWeek, String startTime, String endTime, String takeClassYear, String takeClassSemester, Response.Listener<String> listener){
+    public AddSubjectRequest(String userID, String subjectName, String subjectProfessor, String lectureDayOfTheWeek, String startTime, String endTime, String takeClassYear, String takeClassSemester, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
         parameters = new HashMap<>();
-        parameters.put("userID", userId);
+        parameters.put("userID", userID);
         parameters.put("subjectName", subjectName);
         parameters.put("subjectProfessor", subjectProfessor);
         parameters.put("lectureDayOfTheWeek", lectureDayOfTheWeek);

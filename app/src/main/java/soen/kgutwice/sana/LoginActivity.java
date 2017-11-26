@@ -31,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String userId = idText.getText().toString();
-                        String userPw = pwText.getText().toString();
+                        final String userId = idText.getText().toString();
+                        final String userPw = pwText.getText().toString();
 
                         if(userId.equals("") || userId.equals("")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
 
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("userID", userId);
                                         LoginActivity.this.startActivity(intent);
                                     }
                                     else{
