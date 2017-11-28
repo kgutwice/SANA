@@ -20,7 +20,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String userId = "sms2831";
+    public static String userId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +40,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageButton listButton = (ImageButton)findViewById(R.id.listButton);
 
-        listButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TodoList.class);
-                startActivity(intent);
-            }
-        });
 
-        String[] items = {"여", "기", "는", "하", "루", "의", "모", "든", "일", "정", "을", "보", "는", "곳", "입", "니", "다"};
-        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        ListView listView = (ListView)findViewById(R.id.todayTodoListView);
-        listView.setAdapter(adapter);
+        ListView listView;
+        TodoAdapter todoAdapter;
+
+        todoAdapter = new TodoAdapter();
+
+        listView = (ListView)findViewById(R.id.todayTodoListView);
+        listView.setAdapter(todoAdapter);
+
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+
 
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -64,6 +70,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
         );
+
+
+        ImageButton listButton = (ImageButton)findViewById(R.id.listButton);
+
+        listButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TodoList.class);
+                startActivity(intent);
+            }
+        });
+
+
+//        String[] items = {"여", "기", "는", "하", "루", "의", "모", "든", "일", "정", "을", "보", "는", "곳", "입", "니", "다"};
+//        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+//        ListView listView = (ListView)findViewById(R.id.todayTodoListView);
+//        listView.setAdapter(adapter);
+//
+//        listView.setOnItemClickListener(
+//                new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int i, long id){
+//                        Intent intent = new Intent(getApplicationContext(), ModifyTodo.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//        );
     }
 
     @Override

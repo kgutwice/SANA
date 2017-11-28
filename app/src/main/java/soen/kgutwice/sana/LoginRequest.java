@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class LoginRequest extends StringRequest {
 
-    final static private String URL = "http://203.249.17.196:2013/ms/android/login.php";
+    final static private String URL = "http://203.249.17.196:2013/ms/android/SANA_connector/login.php";
 
     private Map<String, String> parameters;
 

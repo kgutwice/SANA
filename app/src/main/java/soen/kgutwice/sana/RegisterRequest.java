@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
 
-    final static private String URL = "http://203.249.17.196:2013/ms/android/register.php";
-    final static private String URL2 = "http://203.249.17.196:2013/ms/android/idcheck.php";
+    final static private String URL = "http://203.249.17.196:2013/ms/android/SANA_connector/register.php";
+    final static private String URL2 = "http://203.249.17.196:2013/ms/android/SANA_connector/idcheck.php";
     private Map<String, String> parameters;
 
     public RegisterRequest(String userId, String userPw, String userName, Response.Listener<String> listener){

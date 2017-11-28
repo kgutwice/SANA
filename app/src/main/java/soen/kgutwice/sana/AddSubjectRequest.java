@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class AddSubjectRequest extends StringRequest {
 
-    final static private String URL = "http://203.249.17.196:2013/ms/android/addLecture.php";
+    final static private String URL = "http://203.249.17.196:2013/ms/android/SANA_connector/addLecture.php";
 
     private Map<String, String> parameters;
 
