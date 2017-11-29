@@ -32,7 +32,7 @@
             android:name=".AddTodo"
             android:label="@string/add_todo" />
         <activity
-            android:name=".TodoList"
+            android:name=".SemesterTodoList"
             android:label="@string/todo_list" />
         <activity
             android:name=".ModifyTodo"

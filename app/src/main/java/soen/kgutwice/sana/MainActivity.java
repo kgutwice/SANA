@@ -1,6 +1,7 @@
 package soen.kgutwice.sana;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,15 +13,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String userId = null;
+    public static String userID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        userId = getIntent().getStringExtra("userId");
+        userID = getIntent().getStringExtra("userID");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView = (ListView)findViewById(R.id.todayTodoListView);
         listView.setAdapter(todoAdapter);
 
+        // 아래 부분을 전부 투데이 요청으로 바꿔야함.
         todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
         todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
         todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
@@ -59,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
         todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
         todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-
 
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -77,27 +97,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TodoList.class);
+                Intent intent = new Intent(getApplicationContext(), SemesterTodoList.class);
                 startActivity(intent);
             }
         });
 
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
-//        String[] items = {"여", "기", "는", "하", "루", "의", "모", "든", "일", "정", "을", "보", "는", "곳", "입", "니", "다"};
-//        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-//        ListView listView = (ListView)findViewById(R.id.todayTodoListView);
-//        listView.setAdapter(adapter);
-//
-//        listView.setOnItemClickListener(
-//                new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int i, long id){
-//                        Intent intent = new Intent(getApplicationContext(), ModifyTodo.class);
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                Toast.makeText(getApplicationContext(), year + " " + month + " " + dayOfMonth, Toast.LENGTH_LONG).show(); // Example : 2017 10 30
+
+                // 요청을 날짜로 받고 해당 날짜의 투두만 리턴해야함
+                // getTodayTodoFromDB(userID, year, month, dayOfMonth);
+
+            }
+        });
+
+        // 먼저 만들어지자 마자 오늘 데이터를 가져온다.
+        // getTodayTodoFromDB(userID, 오늘 년도, 오늘 달, 오늘 날짜);
+
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -126,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.subjectList) {
             Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-            intent.putExtra("userId", userId);
+            intent.putExtra("userID", userID);
             startActivity(intent);
             return true;
         }
@@ -153,5 +176,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    void getTodayTodoFromDB(final String userID, final String year, final String month, final String day){
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="하루의 Todo를 요청하는 URL입니다.";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // 제이슨으로 받는다면
+
+                        try{
+                            JSONObject reader = new JSONObject(response);
+                            JSONObject todoData = reader.getJSONObject("");
+
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("userID", userID);
+                params.put("year", year);
+                params.put("month", month);
+                params.put("day", day);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }
