@@ -116,9 +116,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         // 먼저 만들어지자 마자 오늘 데이터를 가져온다.
+        // 받아야 할 데이터는 TodoItem과 같다. 받은 데이터를 잘 넣는다.
+        // 넣기 전에 리스트뷰를 먼저 비우자.
         // getTodayTodoFromDB(userID, 오늘 년도, 오늘 달, 오늘 날짜);
 
 
+        getIDandNameandSet(userID);
     }
 
 
@@ -163,15 +166,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        }
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -187,11 +190,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // 제이슨으로 받는다면
 
                         try{
                             JSONObject reader = new JSONObject(response);
-                            JSONObject todoData = reader.getJSONObject("");
+                            //JSONObject data = reader.getJSONObject("");
 
                         } catch(Exception e){
                             e.printStackTrace();
@@ -211,6 +213,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 params.put("year", year);
                 params.put("month", month);
                 params.put("day", day);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
+    void getIDandNameandSet(final String userID){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="아이디와 이름을 요청하는 URL입니다.";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try{
+                            JSONObject reader = new JSONObject(response);
+                            String receiveUserID = reader.getString("userID");
+                            String receiveUserName = reader.getString("userName");
+                            TextView idTextView = (TextView)findViewById(R.id.userID);
+                            TextView nameTextView = (TextView)findViewById(R.id.userName);
+                            idTextView.setText(receiveUserID);
+                            nameTextView.setText(receiveUserName);
+
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("userID", userID);
 
                 return params;
             }

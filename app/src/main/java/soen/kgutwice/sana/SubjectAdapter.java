@@ -14,19 +14,19 @@ import java.util.ArrayList;
 /**
  * Created by ailab on 2017-11-27.
  */
-public class TodoAdapter extends BaseAdapter {
+public class SubjectAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList;
-    private ArrayList<TodoItem> todoItemList = new ArrayList<>();
+    private ArrayList<SubjectItem> subjectItemList = new ArrayList<>();
 
     // ListViewAdapter의 생성자
-    public TodoAdapter() {
+    public SubjectAdapter() {
 
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
     public int getCount() {
-        return todoItemList.size() ;
+        return subjectItemList.size() ;
     }
 
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
@@ -38,27 +38,21 @@ public class TodoAdapter extends BaseAdapter {
         // "listview_todoitem" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_todoitem, parent, false);
+            convertView = inflater.inflate(R.layout.listview_subjectitem, parent, false);
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView todoTextView = (TextView)convertView.findViewById(R.id.todo);
         TextView subjectTextView = (TextView)convertView.findViewById(R.id.subject);
-        TextView deadlineTextView = (TextView)convertView.findViewById(R.id.deadline);
-        TextView actualDeadlineTextView = (TextView)convertView.findViewById(R.id.actualDeadline);
-        CheckBox completedCheckBox = (CheckBox)convertView.findViewById(R.id.completed);
-        RatingBar importanceRatingBar = (RatingBar)convertView.findViewById(R.id.importance);
+        TextView professorTextView = (TextView)convertView.findViewById(R.id.professor);
+        TextView courseTimeTextView = (TextView)convertView.findViewById(R.id.courseTime);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        TodoItem todoItem = todoItemList.get(position);
+        SubjectItem subjectItem = subjectItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        todoTextView.setText(todoItem.getTodo());
-        subjectTextView.setText(todoItem.getSubject());
-        deadlineTextView.setText(todoItem.getDeadline());
-        actualDeadlineTextView.setText(todoItem.getActualDeadline());
-        completedCheckBox.setChecked(todoItem.getCompleted());
-        importanceRatingBar.setRating(todoItem.getImportance());
+        subjectTextView.setText(subjectItem.getSubjectName());
+        professorTextView.setText(subjectItem.getSubjectProfessor());
+        courseTimeTextView.setText(subjectItem.getSubjectcourseTime());
 
         return convertView;
     }
@@ -72,20 +66,17 @@ public class TodoAdapter extends BaseAdapter {
     // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
     @Override
     public Object getItem(int position) {
-        return todoItemList.get(position) ;
+        return subjectItemList.get(position) ;
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String todo, String subject, String deadline, String actualDeadline, boolean completed, int importance) {
-        TodoItem item = new TodoItem();
+    public void addItem(String subjectName, String professorName, String courseTime) {
+        SubjectItem item = new SubjectItem();
 
-        item.setTodo(todo);
-        item.setSubject(subject);
-        item.setDeadline(deadline);
-        item.setActualDeadline(actualDeadline);
-        item.setCompleted(completed);
-        item.setImportance(importance);
+        item.setSubjectName(subjectName);
+        item.setSubjectProfessor(professorName);
+        item.setSubjectcourseTime(courseTime);
 
-        todoItemList.add(item);
+        subjectItemList.add(item);
     }
 }
