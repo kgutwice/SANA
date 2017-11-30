@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SANA.iml" filepath="$PROJECT_DIR$/SANA.iml" />
+      <module fileurl="file://C:\Users\Minsung\sana\SANA\SANA.iml" filepath="C:\Users\Minsung\sana\SANA\SANA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Minsung\sana\SANA\app\app.iml" filepath="C:\Users\Minsung\sana\SANA\app\app.iml" />
     </modules>
   </component>
 </project>
