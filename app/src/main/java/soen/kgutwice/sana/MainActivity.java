@@ -3,6 +3,7 @@ package soen.kgutwice.sana;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -41,6 +43,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String userID = null;
+    private String deadLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,24 +66,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         ListView listView;
-        TodoAdapter todoAdapter;
+        final TodoAdapter todoAdapter;
 
         todoAdapter = new TodoAdapter();
 
         listView = (ListView)findViewById(R.id.todayTodoListView);
         listView.setAdapter(todoAdapter);
 
-        // 아래 부분을 전부 투데이 요청으로 바꿔야함.
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
 
+
+
+        // 아래 부분을 전부 투데이 요청으로 바꿔야함.
+        /*
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+    */
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -108,6 +115,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 Toast.makeText(getApplicationContext(), year + " " + month + " " + dayOfMonth, Toast.LENGTH_LONG).show(); // Example : 2017 10 30
+                deadLine = Integer.toString(year) + Integer.toString(month+1) + Integer.toString(dayOfMonth);
+
+                Log.i("tt", deadLine);
+
+                //서버로부터 데이터 받아오기
+                Response.Listener<String> responseListener = new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String s) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(s);
+                            boolean success = jsonResponse.getBoolean("success");
+                            JSONArray data = (JSONArray)jsonResponse.get("data");
+                            Log.i("tt", data.toString());
+                            if(success) {
+                                for(int i=0; i<data.length(); i++) {
+                                    JSONObject d = data.getJSONObject(i);
+                                    //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+
+                                    todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"));
+
+                                }
+                                todoAdapter.notifyDataSetChanged();
+
+                            } else {
+
+                            }
+                        } catch(JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                MainActivityTodoListRequest mainActivityTodoListRequest = new MainActivityTodoListRequest("sms2831",deadLine,responseListener);
+
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                queue.add(mainActivityTodoListRequest);
+
 
                 // 요청을 날짜로 받고 해당 날짜의 투두만 리턴해야함
                 // getTodayTodoFromDB(userID, year, month, dayOfMonth);

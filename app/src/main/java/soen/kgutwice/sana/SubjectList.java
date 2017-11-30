@@ -3,6 +3,7 @@ package soen.kgutwice.sana;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,10 +13,20 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class SubjectList extends AppCompatActivity {
 
     public static String userID;
-
+    private ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +35,37 @@ public class SubjectList extends AppCompatActivity {
         Intent intent = getIntent();
         userID = intent.getStringExtra("userID");
         Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
+        final ArrayList<String> items = new ArrayList<String>();
 
-        String[] items = {"여", "기", "는", "과", "목", "리", "스", "트", "를", "출", "력", "합", "니", "다"};
-        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        Response.Listener<String> responseListener = new Response.Listener<String>(){
+            @Override
+            public void onResponse(String s) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(s);
+                    boolean success = jsonResponse.getBoolean("success");
+                    JSONArray data = (JSONArray)jsonResponse.get("data");
+                    if(success) {
+                        for(int i=0; i<data.length(); i++) {
+                            JSONObject d = data.getJSONObject(i);
+                            items.add(d.getString("subjectName"));
+                            adapter.notifyDataSetChanged();
+                        }
+                        Log.i("test", items.toString());
+                    } else {
+                        Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                } catch(JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest("sms2831","2017","1",responseListener);
+
+        RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
+        queue.add(semesterTodoListRequest);
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         ListView subjectListView = (ListView)findViewById(R.id.subjectListView);
         subjectListView.setAdapter(adapter);
 
