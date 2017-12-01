@@ -48,5 +48,7 @@
         android:layout_alignLeft="@+id/editText3"
         android:layout_alignStart="@+id/editText3"
         android:layout_below="@+id/editText3"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:numStars="3"
+        />
 </RelativeLayout>
