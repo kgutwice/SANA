@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class SubjectList extends AppCompatActivity {
 
     public static String userID;
-
+    private ArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +35,7 @@ public class SubjectList extends AppCompatActivity {
         Intent intent = getIntent();
         userID = intent.getStringExtra("userID");
         Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
-
-        ListView listView;
-        final SubjectAdapter subjectAdapter;
-        subjectAdapter = new SubjectAdapter();
-
-        listView = (ListView)findViewById(R.id.subjectListView);
-        listView.setAdapter(subjectAdapter);
+        final ArrayList<String> items = new ArrayList<String>();
 
         Response.Listener<String> responseListener = new Response.Listener<String>(){
             @Override
@@ -53,12 +47,11 @@ public class SubjectList extends AppCompatActivity {
                     if(success) {
                         for(int i=0; i<data.length(); i++) {
                             JSONObject d = data.getJSONObject(i);
-                            Log.i("tt", d.toString());
-                            String courseTime = "" + d.getString("lectureDayOfTheWeek") + "요일, " + d.getString("startTime") + " ~ " + d.getString("endTime");
-                            subjectAdapter.addItem(d.getString("subjectName"), d.getString("subjectProfessor"), courseTime);
+                            items.add(d.getString("subjectName"));
+                            Log.i("dd",d.toString());
+                            adapter.notifyDataSetChanged();
                         }
-                        subjectAdapter.notifyDataSetChanged();
-                        Log.i("test", subjectAdapter.toString());
+                        Log.i("test", items.toString());
                     } else {
                         Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                     }
@@ -68,16 +61,16 @@ public class SubjectList extends AppCompatActivity {
             }
         };
 
-        SubjectListRequest subjectoListRequest = new SubjectListRequest("sms2831","2017","1",responseListener);
+        SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest("sms2831","2017","1",responseListener);
 
         RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
-        queue.add(subjectoListRequest);
+        queue.add(semesterTodoListRequest);
 
-//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-//        ListView subjectListView = (ListView)findViewById(R.id.subjectListView);
-//        subjectListView.setAdapter(adapter);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        ListView subjectListView = (ListView)findViewById(R.id.subjectListView);
+        subjectListView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(
+        subjectListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id){
