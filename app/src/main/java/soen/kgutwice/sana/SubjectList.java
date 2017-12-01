@@ -48,6 +48,7 @@ public class SubjectList extends AppCompatActivity {
                         for(int i=0; i<data.length(); i++) {
                             JSONObject d = data.getJSONObject(i);
                             items.add(d.getString("subjectName"));
+                            Log.i("dd",d.toString());
                             adapter.notifyDataSetChanged();
                         }
                         Log.i("test", items.toString());
