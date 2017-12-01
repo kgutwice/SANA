@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.example.minsung.todolist.LoginActivity">
+    tools:context="soen.kgutwice.sana.LoginActivity">
 
     <TextView
         android:id="@+id/loginMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <EditText
@@ -55,6 +55,7 @@
         android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
+        android:layout_marginBottom="180dp"
         android:text="회원가입"
         />
 

@@ -43,4 +43,10 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="150dp"
+        android:text="과목 수정"
+        />
+
 </LinearLayout>

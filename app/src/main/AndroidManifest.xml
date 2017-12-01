@@ -21,13 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegisterActivity" />
         <activity
-            android:name=".RegisterActivity" />
-        <activity
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".MainActivity"
             android:label="@string/app_name"
-            android:name=".MainActivity">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".AddTodo"
             android:label="@string/add_todo" />
@@ -42,10 +40,8 @@
             android:label="@string/add_subject" />
         <activity
             android:name=".SubjectList"
-            android:label="@string/subject_list"
-            >
-
-        </activity>
+            android:label="@string/subject_list"></activity>
+        <activity android:name=".Setting"></activity>
     </application>
 
 </manifest>

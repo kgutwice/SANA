@@ -6,21 +6,24 @@
 
 
 
-    <item
-        android:id="@+id/takeLecture"
-        android:title="듣고있는 과목" />
-    <item
-        android:id="@+id/nav_gallery"
-        android:icon="@drawable/ic_menu_gallery"
-        android:title="Gallery" />
-    <item
-        android:id="@+id/nav_slideshow"
-        android:icon="@drawable/ic_menu_slideshow"
-        android:title="Slideshow" />
-    <item
-        android:id="@+id/nav_manage"
-        android:icon="@drawable/ic_menu_manage"
-        android:title="Tools" />
+
+    <group
+        android:id="@+id/menu_top">
+
+        <item
+            android:id="@+id/setting"
+            android:title="설정" >
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/menu_middle">
+
+        <item
+            android:title="듣고있는 과목" >
+        </item>
+    </group>
+
 
 
 </menu>

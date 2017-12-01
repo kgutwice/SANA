@@ -45,12 +45,12 @@ public class SemesterTodoList extends AppCompatActivity {
                     boolean success = jsonResponse.getBoolean("success");
                     JSONArray data = (JSONArray)jsonResponse.get("data");
                     if(success) {
-                            for(int i=0; i<data.length(); i++) {
-                                JSONObject d = data.getJSONObject(i);
-                                //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-                                Log.i("tt", d.toString());
-                                todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"));
-                            }
+                        for(int i=0; i<data.length(); i++) {
+                            JSONObject d = data.getJSONObject(i);
+                            //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
+                            Log.i("tt", d.toString());
+                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"));
+                        }
                         todoAdapter.notifyDataSetChanged();
 
                     } else {
@@ -66,19 +66,6 @@ public class SemesterTodoList extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
         queue.add(semesterTodoListRequest);
-
-        // 아래 부분을 한학기의 요청으로 바꿔야함.
-        /*
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        */
 
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
