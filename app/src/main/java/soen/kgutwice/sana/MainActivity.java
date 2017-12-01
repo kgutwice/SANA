@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // 투두 요청
 
                  getTodayTodoFromDB(userID, year, month, dayOfMonth, todoAdapter);
-
             }
         });
 
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // 넣기 전에 리스트뷰를 먼저 비우자.
         // getTodayTodoFromDB(userID, 오늘 년도, 오늘 달, 오늘 날짜);
 
-
+        getLectureFromDB(userID, "2017", "1");
         getIDandNameandSet(userID);
     }
 
@@ -278,4 +277,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+    void getLectureFromDB(final String userID, final String takeClassYear, final String takeClassSemeter){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/getLecture.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try{
+                            JSONObject reader = new JSONObject(response);
+                            boolean success = reader.getBoolean("success");
+                            JSONArray data = (JSONArray)reader.get("data");
+                            Log.i("tt", data.toString());
+                            if(success) {
+                                for(int i=0; i<data.length(); i++) {
+                                    JSONObject row = data.getJSONObject(i);
+                                    NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
+                                    Menu m = navView.getMenu();
+                                    m.add(row.getString("subjectName"));
+                                }
+                            } else {
+
+                            }
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("userID", userID);
+                params.put("takeClassYear", takeClassYear);
+                params.put("takeClassSemester", takeClassSemeter);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
 }
