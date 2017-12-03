@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,35 +8,43 @@
     android:orientation="horizontal">
 
     <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="149dp"
-        android:ems="10"
-        android:inputType="date" />
-
-    <EditText
         android:id="@+id/editText5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
-        android:inputType="date" />
+        android:hint="과목명을 받아와서 적어야함"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText6"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editText4"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/editText4"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Todo"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:hint="여기는 todo를 추가하는곳입니다."
-        android:inputType="textPersonName" />
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="28dp"
+        android:text="완료 여부"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -45,8 +53,39 @@
         android:layout_alignEnd="@+id/editText5"
         android:layout_alignRight="@+id/editText5"
         android:layout_below="@+id/editText5"
-        android:layout_marginTop="57dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
         android:numStars="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="89dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="182dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        style="?android:attr/ratingBarStyleSmall"
         />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
