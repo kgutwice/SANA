@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/modifyTodoContent" />
 
     <TextView
-        android:id="@+id/actualDeadline"
+        android:id="@+id/actualCompletedDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
@@ -119,14 +119,14 @@
         app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <CheckBox
-        android:id="@+id/modifyTodoisComplete"
+        android:id="@+id/modifyTodoisCompleted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="44dp"
         android:text="완료 여부"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actualDeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/actualCompletedDay" />
 
     <RatingBar
         android:id="@+id/modifyTodoRatingBar"
@@ -136,7 +136,7 @@
         android:layout_marginTop="20dp"
         android:numStars="3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modifyTodoisComplete"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoisCompleted"
 
         />
 </android.support.constraint.ConstraintLayout>

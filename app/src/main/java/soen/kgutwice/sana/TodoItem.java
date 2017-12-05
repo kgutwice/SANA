@@ -11,7 +11,7 @@ public class TodoItem {
     String todo;
     String subject;
     String deadline;
-    String actualDeadline;
+    String actualCompletedDay;
     Boolean completed; // True이면 완료된것.
     int importance;
 
@@ -39,12 +39,12 @@ public class TodoItem {
         this.deadline = deadline;
     }
 
-    public String getActualDeadline() {
-        return actualDeadline;
+    public String getActualCompletedDay() {
+        return actualCompletedDay;
     }
 
-    public void setActualDeadline(String actualDeadline) {
-        this.actualDeadline = actualDeadline;
+    public void setActualCompletedDay(String actualCompletedDay) {
+        this.actualCompletedDay = actualCompletedDay;
     }
 
     public Boolean getCompleted() {

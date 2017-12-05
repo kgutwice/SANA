@@ -82,6 +82,9 @@ public class SubjectList extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id){
                         Intent intent = new Intent(getApplicationContext(), AddTodo.class);
+                        SubjectItem subjectItem = (SubjectItem)parent.getAdapter().getItem(i);
+                        String subjectName = subjectItem.getSubjectName();
+                        intent.putExtra("subjectName", subjectName);
                         startActivity(intent);
                     }
                 }
