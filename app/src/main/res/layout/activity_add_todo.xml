@@ -11,8 +11,8 @@
         android:id="@+id/addTodoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="264dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="28dp"
         android:text="저장"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +54,7 @@
 
     <Spinner
         android:id="@+id/addTodoCompletedDayYear"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
@@ -64,7 +64,7 @@
 
     <Spinner
         android:id="@+id/addTodoCompletedDayMonth"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
@@ -73,7 +73,7 @@
 
     <Spinner
         android:id="@+id/addTodoCompletedDayDay"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
@@ -93,7 +93,7 @@
 
     <Spinner
         android:id="@+id/addTodoActualCompletedDayYear"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
@@ -103,7 +103,7 @@
 
     <Spinner
         android:id="@+id/addTodoActualCompletedDayMonth"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/addTodoActualCompletedDayYear"
@@ -111,7 +111,7 @@
 
     <Spinner
         android:id="@+id/addTodoActualCompletedDayDay"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/addTodoActualCompletedDayMonth"
@@ -127,15 +127,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actualCompletedDay" />
 
+    <TextView
+        android:id="@id/importance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:text="중요도"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTodoisCompleted" />
+
     <RatingBar
         android:id="@+id/addTodoRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="32dp"
         android:numStars="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTodoisCompleted"
-        />
+        app:layout_constraintStart_toEndOf="@+id/importance"
+        app:layout_constraintTop_toBottomOf="@+id/addTodoisCompleted" />
 
 </android.support.constraint.ConstraintLayout>

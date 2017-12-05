@@ -13,7 +13,7 @@ public class TodoItem {
     String deadline;
     String actualCompletedDay;
     Boolean completed; // True이면 완료된것.
-    int importance;
+    float importance;
 
     public String getTodo() {
         return todo;
@@ -55,11 +55,11 @@ public class TodoItem {
         this.completed = completed;
     }
 
-    public int getImportance() {
+    public float getImportance() {
         return importance;
     }
 
-    public void setImportance(int importance) {
+    public void setImportance(float importance) {
         this.importance = importance;
     }
 }

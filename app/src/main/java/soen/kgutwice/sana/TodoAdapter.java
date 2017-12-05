@@ -56,7 +56,7 @@ public class TodoAdapter extends BaseAdapter {
         todoTextView.setText(todoItem.getTodo());
         subjectTextView.setText(todoItem.getSubject());
         deadlineTextView.setText(todoItem.getDeadline());
-        actualDeadlineTextView.setText(todoItem.getActualDeadline());
+        actualDeadlineTextView.setText(todoItem.getActualCompletedDay());
         completedCheckBox.setChecked(todoItem.getCompleted());
         importanceRatingBar.setRating(todoItem.getImportance());
 
@@ -76,13 +76,13 @@ public class TodoAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String todo, String subject, String deadline, String actualDeadline, boolean completed, int importance) {
+    public void addItem(String todo, String subject, String deadline, String actualCompletedDay, boolean completed, int importance) {
         TodoItem item = new TodoItem();
 
         item.setTodo(todo);
         item.setSubject(subject);
         item.setDeadline(deadline);
-        item.setActualDeadline(actualDeadline);
+        item.setActualCompletedDay(actualCompletedDay);
         item.setCompleted(completed);
         item.setImportance(importance);
 

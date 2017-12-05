@@ -1,22 +1,34 @@
 package soen.kgutwice.sana;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddTodo extends AppCompatActivity {
 
@@ -33,15 +45,18 @@ public class AddTodo extends AppCompatActivity {
         final TextView textViewAddTodoSubject = (TextView)findViewById(R.id.addTodoSubject);
         textViewAddTodoSubject.setText(subjectName);
 
-        final EditText editTextaddTodoContent = (EditText)findViewById(R.id.addTodoContent);
+        final EditText editTextAddTodoContent = (EditText)findViewById(R.id.addTodoContent);
 
+        final Spinner spinnerCompletedDayYear = (Spinner)findViewById(R.id.addTodoCompletedDayYear);
+        final Spinner spinnerCompletedDayMonth = (Spinner)findViewById(R.id.addTodoCompletedDayMonth);
+        final Spinner spinnerCompletedDayDay = (Spinner)findViewById(R.id.addTodoCompletedDayDay);
+        final Spinner spinnerActualCompletedDayYear = (Spinner)findViewById(R.id.addTodoActualCompletedDayYear);
+        final Spinner spinnerActualCompletedDayMonth = (Spinner)findViewById(R.id.addTodoActualCompletedDayMonth);
+        final Spinner spinnerActualCompletedDayDay = (Spinner)findViewById(R.id.addTodoActualCompletedDayDay);
 
-        final Spinner spinnerLectureDayOfTheWeek = (Spinner)findViewById(R.id.addTodoCompletedDayYear);
-        final Spinner spinnerStartTime = (Spinner)findViewById(R.id.addTodoCompletedDayMonth);
-        final Spinner spinnerEndTime = (Spinner)findViewById(R.id.addTodoCompletedDayDay);
-        final Spinner spinnerTakeClassYear = (Spinner)findViewById(R.id.addTodoActualCompletedDayYear);
-        final Spinner spinnerTakeClassSemester = (Spinner)findViewById(R.id.addTodoActualCompletedDayMonth);
-        final Spinner spinnerTakeClassSemester = (Spinner)findViewById(R.id.addTodoActualCompletedDayDay);
+        final CheckBox checkBoxisCompleted = (CheckBox)findViewById(R.id.addTodoisCompleted);
+
+        final RatingBar ratingBar = (RatingBar)findViewById(R.id.addTodoRatingBar);
 
 
         Spinner addTodoCompletedDayYear =(Spinner)findViewById(R.id.addTodoCompletedDayYear);
@@ -70,47 +85,60 @@ public class AddTodo extends AppCompatActivity {
         addTodoActualCompletedDayDay.setAdapter(addTodoDayAdapter);
 
 
+        String todo = editTextAddTodoContent.getText().toString();
+        String deadline = spinnerCompletedDayYear.getSelectedItem().toString() + spinnerCompletedDayMonth.getSelectedItem().toString() + spinnerCompletedDayDay.getSelectedItem().toString();
+        String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + spinnerActualCompletedDayMonth.getSelectedItem().toString() + spinnerActualCompletedDayDay.getSelectedItem().toString();
+        String completed = String.valueOf(checkBoxisCompleted.isChecked());
+        String importance = String.valueOf(ratingBar.getRating());
 
-        Button addSubjectButton = (Button)findViewById(R.id.addSubjectButton);
-        addSubjectButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                // 데이터 송신
+        addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance);
+    }
 
-                String subjectName = editTextSubjectName.getText().toString();
-                String subjectProfessor = editTextSubjectProfessor.getText().toString();
-                String lectureDayOfTheWeek = spinnerLectureDayOfTheWeek.getSelectedItem().toString();
-                String startTime = spinnerStartTime.getSelectedItem().toString();
-                String endTime = spinnerEndTime.getSelectedItem().toString();
-                String takeClassYear = spinnerTakeClassYear.getSelectedItem().toString();
-                String takeClassSemester = spinnerTakeClassSemester.getSelectedItem().toString();
 
-                Toast.makeText(getApplicationContext(), userID + subjectName + subjectProfessor + lectureDayOfTheWeek + startTime + endTime + takeClassYear + takeClassSemester, Toast.LENGTH_LONG).show();
+    void addTodoToDB(final String userID, final String todo, final String subjectName, final String deadline, final String actualCompletedDay, final String completed, final String importance){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/addTodo.php";
 
-                Response.Listener<String> responseListener = new Response.Listener<String>(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String s) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(s);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if(success){
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject reader = new JSONObject(response);
+                            boolean success = reader.getBoolean("success");
+                            if(success) {
                                 Intent intent = new Intent(getApplicationContext(), SubjectList.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                             }
-                        } catch(JSONException e) {
+                        } catch(Exception e){
                             e.printStackTrace();
                         }
+
                     }
-                };
-
-                AddSubjectRequest addSubjectRequest = new AddSubjectRequest(userID, subjectName, subjectProfessor, lectureDayOfTheWeek, startTime, endTime, takeClassYear, takeClassSemester, responseListener);
-
-                RequestQueue queue = Volley.newRequestQueue(AddTodo.this);
-                queue.add(addSubjectRequest);
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
             }
-        });
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("userID", userID);
+                params.put("todo", todo);
+                params.put("subjectName", subjectName);
+                params.put("deadline", deadline);
+                params.put("actualCompletedDay", actualCompletedDay);
+                params.put("completed", completed);
+                params.put("importance", importance);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
 }
