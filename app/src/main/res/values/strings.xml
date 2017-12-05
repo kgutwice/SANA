@@ -15,4 +15,6 @@
     <string name="modify_subject">과목 수정</string>
     <string name="add_from_kutis">쿠티스 연동</string>
 
+    <string name="setting">설정</string>
+
 </resources>

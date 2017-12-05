@@ -1,8 +1,13 @@
 package soen.kgutwice.sana;
 
-/**
- * Created by ailab on 2017-11-29.
- */
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class ModifySubject {
+public class ModifySubject extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_modify_subject);
+    }
 }

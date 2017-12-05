@@ -1,54 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="soen.kgutwice.sana.ModifyTodo">
+    tools:context="soen.kgutwice.sana.AddTodo"
+    android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editText"
+    <Button
+        android:id="@+id/modifyTodoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginLeft="264dp"
+        android:layout_marginTop="24dp"
+        android:text="저장"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/modifyTodoSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="104dp"
+        android:ems="10"
+        android:hint="과목명을 받아와서 적어야함"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/modifyTodoContent"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="54dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="여기는 todo를 수정하는곳입니다."
-        android:inputType="textPersonName" />
+        android:hint="Todo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoSubject" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <TextView
+        android:id="@+id/deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_alignRight="@+id/editText"
-        android:layout_below="@+id/editText"
-        android:layout_marginTop="31dp"
-        android:ems="10"
-        android:inputType="date" />
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="24dp"
+        android:text="마감 날짜"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoContent" />
 
-    <EditText
-        android:id="@+id/editText3"
+    <Spinner
+        android:id="@+id/modifyTodoDeadlineYear"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/deadline"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoContent" />
+
+
+    <Spinner
+        android:id="@+id/modifyTodoDeadlineMonth"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/modifyTodoDeadlineYear"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoContent" />
+
+    <Spinner
+        android:id="@+id/modifyTodoDeadlineDay"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/modifyTodoDeadlineMonth"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoContent" />
+
+    <TextView
+        android:id="@+id/actualDeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:inputType="date" />
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="24dp"
+        android:text="실제 마감일"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
+
+    <Spinner
+        android:id="@+id/modifyTodoActualDeadlineYear"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/deadline"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
+
+
+    <Spinner
+        android:id="@+id/modifyTodoActualDeadlineMonth"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/modifyTodoActualDeadlineYear"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
+
+    <Spinner
+        android:id="@+id/modifyTodoActualDeadlineDay"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/modifyTodoActualDeadlineMonth"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
+
+    <CheckBox
+        android:id="@+id/modifyTodoisComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="44dp"
+        android:text="완료 여부"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actualDeadline" />
 
     <RatingBar
-        android:id="@+id/ratingBar2"
+        android:id="@+id/modifyTodoRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
-        android:layout_below="@+id/editText3"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp"
         android:numStars="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoisComplete"
+
         />
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

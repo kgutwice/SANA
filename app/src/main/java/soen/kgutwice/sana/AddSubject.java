@@ -26,42 +26,42 @@ public class AddSubject extends AppCompatActivity {
 
         final String userID = getIntent().getStringExtra("userID");
 
-        final EditText editTextSubjectName = (EditText)findViewById(R.id.subjectName);
-        final EditText editTextSubjectProfessor = (EditText)findViewById(R.id.subjectProfessor);
-        final Spinner spinnerLectureDayOfTheWeek = (Spinner)findViewById(R.id.lectureDayOfTheWeek);
-        final Spinner spinnerStartTime = (Spinner)findViewById(R.id.startTime);
-        final Spinner spinnerEndTime = (Spinner)findViewById(R.id.endTime);
-        final Spinner spinnerTakeClassYear = (Spinner)findViewById(R.id.takeClassYear);
-        final Spinner spinnerTakeClassSemester = (Spinner)findViewById(R.id.takeClassSemester);
+        final EditText editTextSubjectName = (EditText)findViewById(R.id.addSubjectName);
+        final EditText editTextSubjectProfessor = (EditText)findViewById(R.id.addSubjectProfessor);
+        final Spinner spinnerLectureDayOfTheWeek = (Spinner)findViewById(R.id.addSubjectLectureDayOfTheWeek);
+        final Spinner spinnerStartTime = (Spinner)findViewById(R.id.addSubjectStartTime);
+        final Spinner spinnerEndTime = (Spinner)findViewById(R.id.addSubjectEndTime);
+        final Spinner spinnerTakeClassYear = (Spinner)findViewById(R.id.addSubjectTakeClassYear);
+        final Spinner spinnerTakeClassSemester = (Spinner)findViewById(R.id.addSubjectTakeClassSemester);
 
-        Spinner lectureDayOfTheWeek =(Spinner)findViewById(R.id.lectureDayOfTheWeek);
+        Spinner lectureDayOfTheWeek =(Spinner)findViewById(R.id.addSubjectLectureDayOfTheWeek);
         String[] lectureDayOfTheWeekItems = new String[]{"월", "화", "수", "목", "금", "토", "일"};
         ArrayAdapter<String> lectureDayOfTheWeekAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lectureDayOfTheWeekItems);
         lectureDayOfTheWeek.setAdapter(lectureDayOfTheWeekAdapter);
 
-        Spinner startTime =(Spinner)findViewById(R.id.startTime);
+        Spinner startTime =(Spinner)findViewById(R.id.addSubjectStartTime);
         String[] startTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00"};
         ArrayAdapter<String> startTimeitemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, startTimeItems);
         startTime.setAdapter(startTimeitemsAdapter);
         // 되돌아가게? 원형으로?
 
-        Spinner endTime =(Spinner)findViewById(R.id.endTime);
+        Spinner endTime =(Spinner)findViewById(R.id.addSubjectEndTime);
         String[] endTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00"};
         ArrayAdapter<String> endTimeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, endTimeItems);
         endTime.setAdapter(endTimeAdapter);
 
-        Spinner takeClassYear =(Spinner)findViewById(R.id.takeClassYear);
+        Spinner takeClassYear =(Spinner)findViewById(R.id.addSubjectTakeClassYear);
         Integer[] takeClassYearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
         ArrayAdapter<Integer> takeClassYearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, takeClassYearItems);
         takeClassYear.setAdapter(takeClassYearAdapter);
         // 끝없이?
 
-        Spinner takeClassSemester =(Spinner)findViewById(R.id.takeClassSemester);
+        Spinner takeClassSemester =(Spinner)findViewById(R.id.addSubjectTakeClassSemester);
         Integer[] takeClassSemesterItems = new Integer[]{1, 2};
         ArrayAdapter<Integer> takeClassSemesterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, takeClassSemesterItems);
         takeClassSemester.setAdapter(takeClassSemesterAdapter);
 
-        Button addSubjectButton = (Button)findViewById(R.id.submitButton);
+        Button addSubjectButton = (Button)findViewById(R.id.addSubjectButton);
         addSubjectButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
