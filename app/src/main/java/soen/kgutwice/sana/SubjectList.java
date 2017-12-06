@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,6 +28,9 @@ public class SubjectList extends AppCompatActivity {
 
     public static String userID;
     private ArrayAdapter adapter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +86,7 @@ public class SubjectList extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id){
                         Intent intent = new Intent(getApplicationContext(), AddTodo.class);
+                        intent.putExtra("userID", userID);
                         SubjectItem subjectItem = (SubjectItem)parent.getAdapter().getItem(i);
                         String subjectName = subjectItem.getSubjectName();
                         intent.putExtra("subjectName", subjectName);
@@ -89,6 +94,22 @@ public class SubjectList extends AppCompatActivity {
                     }
                 }
         );
+
+//        Button modifyButton = (Button)findViewById(R.id.modifySubject);
+//        modifyButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                View parentRow = (View)view.getParent();
+//                ListView listView = (ListView)parentRow.getParent();
+//                final int position = listView.getPositionForView(parentRow);
+//
+//                Intent intent = new Intent(getApplicationContext(), ModifySubject.class);
+//                intent.putExtra("userID", userID);
+//                SubjectItem subjectItem = (SubjectItem)listView.getAdapter().getItem(position);
+//                String subjectName = subjectItem.getSubjectName();
+//                intent.putExtra("subjectName", subjectName);
+//            }
+//        });
     }
 
     @Override

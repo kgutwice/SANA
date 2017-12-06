@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addTodoSubject" />
 
     <TextView
-        android:id="@+id/completedDay"
+        android:id="@+id/deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
@@ -53,31 +53,31 @@
         app:layout_constraintTop_toBottomOf="@+id/addTodoContent" />
 
     <Spinner
-        android:id="@+id/addTodoCompletedDayYear"
+        android:id="@+id/addTodoDeadlineYear"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/completedDay"
+        app:layout_constraintStart_toEndOf="@+id/deadline"
         app:layout_constraintTop_toBottomOf="@+id/addTodoContent" />
 
 
     <Spinner
-        android:id="@+id/addTodoCompletedDayMonth"
+        android:id="@+id/addTodoDeadlineMonth"
         android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/addTodoCompletedDayYear"
+        app:layout_constraintStart_toEndOf="@+id/addTodoDeadlineYear"
         app:layout_constraintTop_toBottomOf="@+id/addTodoContent" />
 
     <Spinner
-        android:id="@+id/addTodoCompletedDayDay"
+        android:id="@+id/addTodoDeadlineDay"
         android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/addTodoCompletedDayMonth"
+        app:layout_constraintStart_toEndOf="@+id/addTodoDeadlineMonth"
         app:layout_constraintTop_toBottomOf="@+id/addTodoContent" />
 
     <TextView
@@ -89,7 +89,7 @@
         android:text="실제 마감일"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/completedDay" />
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <Spinner
         android:id="@+id/addTodoActualCompletedDayYear"
@@ -97,8 +97,8 @@
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/completedDay"
-        app:layout_constraintTop_toBottomOf="@+id/completedDay" />
+        app:layout_constraintStart_toEndOf="@+id/deadline"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
 
     <Spinner
@@ -107,7 +107,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/addTodoActualCompletedDayYear"
-        app:layout_constraintTop_toBottomOf="@+id/completedDay" />
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <Spinner
         android:id="@+id/addTodoActualCompletedDayDay"
@@ -115,7 +115,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/addTodoActualCompletedDayMonth"
-        app:layout_constraintTop_toBottomOf="@+id/completedDay" />
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <CheckBox
         android:id="@+id/addTodoisCompleted"

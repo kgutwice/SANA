@@ -5,45 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="soen.kgutwice.sana.AddSubject"
+    tools:context="soen.kgutwice.sana.ModifySubject"
     >
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <Button
-        android:id="@+id/addSubjectButton"
-        android:text="저장"
+        android:id="@+id/modifySubjectButton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="84dp"
+        android:text="저장"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="30dp"
+        app:layout_constraintTop_toTopOf="parent"
 
         />
 
     <EditText
-        android:id="@+id/addSubjectName"
+        android:id="@+id/modifySubjectName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginRight="20dp"
         android:hint="과목명"
         android:inputType="textPersonName"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/addSubjectProfessor"
-        android:hint="담당 교수님"
+        android:id="@+id/modifySubjectProfessor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectName"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="20dp"
+        android:hint="담당 교수님"
         android:inputType="textPersonName"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectName" />
 
     <TextView
         android:id="@+id/dayOfTheWeek"
@@ -52,17 +65,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectProfessor"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectProfessor"
         android:layout_marginTop="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 
         />
 
     <Spinner
-        android:id="@+id/addSubjectLectureDayOfTheWeek"
+        android:id="@+id/modifySubjectLectureDayOfTheWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectProfessor"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectProfessor"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toEndOf="@+id/dayOfTheWeek"
         android:layout_marginLeft="40dp"
@@ -75,44 +88,44 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectLectureDayOfTheWeek"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectLectureDayOfTheWeek"
         android:layout_marginTop="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         />
 
     <Spinner
-        android:id="@+id/addSubjectStartTime"
+        android:id="@+id/modifySubjectStartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/lectureTime"
         android:layout_marginLeft="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectLectureDayOfTheWeek"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectLectureDayOfTheWeek"
         android:layout_marginTop="20dp"
         />
 
     <TextView
-        android:id="@+id/addSubjectSwungDash"
+        android:id="@+id/swungDash"
         android:text="~"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/addSubjectStartTime"
+        app:layout_constraintLeft_toRightOf="@+id/modifySubjectStartTime"
         android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectLectureDayOfTheWeek"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectLectureDayOfTheWeek"
         android:layout_marginTop="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         />
 
     <Spinner
-        android:id="@+id/addSubjectEndTime"
+        android:id="@+id/modifySubjectEndTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/addSubjectStartTime"
+        app:layout_constraintLeft_toRightOf="@+id/modifySubjectStartTime"
         android:layout_marginLeft="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/addSubjectLectureDayOfTheWeek"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectLectureDayOfTheWeek"
         android:layout_marginTop="20dp" />
 
     <TextView
-        android:id="@+id/takeClassYearandSemester"
+        android:id="@+id/modifySubjectTakeClassYearandSemester"
         android:text="수강 년도/학기"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,7 +137,7 @@
         />
 
     <Spinner
-        android:id="@+id/addSubjectTakeClassYear"
+        android:id="@+id/modifySubjectTakeClassYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toLeftOf="@+id/year"
@@ -146,12 +159,12 @@
         />
 
     <Spinner
-        android:id="@+id/addSubjectTakeClassSemester"
+        android:id="@+id/modifySubjectTakeClassSemester"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toLeftOf="@+id/semester"
         android:layout_marginRight="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/takeClassYearandSemester"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectTakeClassYearandSemester"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -161,7 +174,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="70dp"
-        app:layout_constraintTop_toBottomOf="@+id/takeClassYearandSemester"
+        app:layout_constraintTop_toBottomOf="@+id/modifySubjectTakeClassYearandSemester"
         android:layout_marginTop="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         />

@@ -43,6 +43,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/modifySubject"
         android:layout_width="40dp"
         android:layout_height="120dp"
         android:text="과목 수정"

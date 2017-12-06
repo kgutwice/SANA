@@ -3,12 +3,16 @@ package soen.kgutwice.sana;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,29 +25,48 @@ import org.json.JSONObject;
 
 public class SemesterTodoList extends AppCompatActivity {
 
+    String userID;
+    Response.Listener<String> responseListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        userID = getIntent().getStringExtra("userID");
 
         // 여기는 한 학기의 모든 일정을 보는 곳입니다.
 
-        ListView listView;
-        final TodoAdapter todoAdapter;
+        final ListView listView;
 
-        todoAdapter = new TodoAdapter();
+        userID = getIntent().getStringExtra("userID");
 
         listView = (ListView)findViewById(R.id.semesterTodoListView);
-        listView.setAdapter(todoAdapter);
+
+        final Spinner askYear = (Spinner)findViewById(R.id.askYear);
+        Integer[] YearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
+        ArrayAdapter<Integer> YearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, YearItems);
+        askYear.setAdapter(YearAdapter);
+
+        final Spinner askSemester = (Spinner)findViewById(R.id.askSemester);
+        Integer[] SemesterItems = new Integer[]{1, 2};
+        ArrayAdapter<Integer> SemesterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, SemesterItems);
+        askSemester.setAdapter(SemesterAdapter);
 
         //서버로부터 데이터 받아오기
-        Response.Listener<String> responseListener = new Response.Listener<String>(){
+        responseListener = new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
                 try {
                     JSONObject jsonResponse = new JSONObject(s);
                     boolean success = jsonResponse.getBoolean("success");
                     JSONArray data = (JSONArray)jsonResponse.get("data");
+                    final TodoAdapter todoAdapter;
+                    todoAdapter = new TodoAdapter();
+                    listView.setAdapter(todoAdapter);
+
                     if(success) {
                         for(int i=0; i<data.length(); i++) {
                             JSONObject d = data.getJSONObject(i);
@@ -55,6 +78,7 @@ public class SemesterTodoList extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                        // 아니면 아무것도 없어도 뜸
                     }
                 } catch(JSONException e) {
                     e.printStackTrace();
@@ -62,7 +86,7 @@ public class SemesterTodoList extends AppCompatActivity {
             }
         };
 
-        SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest("sms2831","2017","1",responseListener);
+        SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID,"2017","1",responseListener);
 
         RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
         queue.add(semesterTodoListRequest);
@@ -72,10 +96,78 @@ public class SemesterTodoList extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id){
                         Intent intent = new Intent(getApplicationContext(), ModifyTodo.class);
+                        intent.putExtra("userID", userID);
+                        TodoItem todoItem = (TodoItem)parent.getAdapter().getItem(i);
+                        String subjectName = todoItem.getSubject();
+                        intent.putExtra("subjectName", subjectName);
                         startActivity(intent);
                     }
                 }
         );
 
+        askYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String year = askYear.getSelectedItem().toString();
+                String semester = askSemester.getSelectedItem().toString();
+
+                SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID, year, semester, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
+                queue.add(semesterTodoListRequest);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        askSemester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String year = askYear.getSelectedItem().toString();
+                String semester = askSemester.getSelectedItem().toString();
+
+                SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID, year, semester, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
+                queue.add(semesterTodoListRequest);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.subjectList) {
+            Intent intent = new Intent(getApplicationContext(), SubjectList.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

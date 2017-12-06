@@ -4,15 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="soen.kgutwice.sana.AddTodo"
+    tools:context="soen.kgutwice.sana.ModifyTodo"
     android:orientation="horizontal">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
 
     <Button
         android:id="@+id/modifyTodoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="264dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="88dp"
         android:text="저장"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,8 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="172dp"
         android:ems="10"
         android:hint="과목명을 받아와서 적어야함"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -55,7 +70,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoDeadlineYear"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
@@ -65,7 +80,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoDeadlineMonth"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
@@ -74,7 +89,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoDeadlineDay"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
@@ -93,8 +108,8 @@
         app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <Spinner
-        android:id="@+id/modifyTodoActualDeadlineYear"
-        android:layout_width="100dp"
+        android:id="@+id/modifyTodoActualCompletedDayYear"
+        android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
@@ -103,19 +118,19 @@
 
 
     <Spinner
-        android:id="@+id/modifyTodoActualDeadlineMonth"
-        android:layout_width="70dp"
+        android:id="@+id/modifyTodoActualCompletedDayMonth"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/modifyTodoActualDeadlineYear"
+        app:layout_constraintStart_toEndOf="@+id/modifyTodoActualCompletedDayYear"
         app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <Spinner
-        android:id="@+id/modifyTodoActualDeadlineDay"
-        android:layout_width="70dp"
+        android:id="@+id/modifyTodoActualCompletedDayDay"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toEndOf="@+id/modifyTodoActualDeadlineMonth"
+        app:layout_constraintStart_toEndOf="@+id/modifyTodoActualCompletedDayMonth"
         app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
     <CheckBox
@@ -128,15 +143,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actualCompletedDay" />
 
+    <TextView
+        android:id="@id/importance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="32dp"
+        android:text="중요도"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoisCompleted" />
+
     <RatingBar
         android:id="@+id/modifyTodoRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="32dp"
         android:numStars="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modifyTodoisCompleted"
-
-        />
+        app:layout_constraintStart_toEndOf="@+id/importance"
+        app:layout_constraintTop_toBottomOf="@+id/modifyTodoisCompleted" />
 </android.support.constraint.ConstraintLayout>

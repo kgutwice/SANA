@@ -48,7 +48,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/completed"
         android:layout_weight="1"
-        android:text="체크시 완료" />
+        android:text="체크시 완료"
+        android:clickable="false"
+        />
 
     <RatingBar
         android:layout_width="wrap_content"

@@ -40,16 +40,16 @@ public class AddTodo extends AppCompatActivity {
         final String userID = getIntent().getStringExtra("userID");
         final String subjectName = getIntent().getStringExtra("subjectName");
 
-        Toast.makeText(getApplicationContext(), subjectName, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), subjectName + userID, Toast.LENGTH_LONG).show();
 
         final TextView textViewAddTodoSubject = (TextView)findViewById(R.id.addTodoSubject);
         textViewAddTodoSubject.setText(subjectName);
 
         final EditText editTextAddTodoContent = (EditText)findViewById(R.id.addTodoContent);
 
-        final Spinner spinnerCompletedDayYear = (Spinner)findViewById(R.id.addTodoCompletedDayYear);
-        final Spinner spinnerCompletedDayMonth = (Spinner)findViewById(R.id.addTodoCompletedDayMonth);
-        final Spinner spinnerCompletedDayDay = (Spinner)findViewById(R.id.addTodoCompletedDayDay);
+        final Spinner spinnerDeadlineYear = (Spinner)findViewById(R.id.addTodoDeadlineYear);
+        final Spinner spinnerDeadlineMonth = (Spinner)findViewById(R.id.addTodoDeadlineMonth);
+        final Spinner spinnerDeadlineDay = (Spinner)findViewById(R.id.addTodoDeadlineDay);
         final Spinner spinnerActualCompletedDayYear = (Spinner)findViewById(R.id.addTodoActualCompletedDayYear);
         final Spinner spinnerActualCompletedDayMonth = (Spinner)findViewById(R.id.addTodoActualCompletedDayMonth);
         final Spinner spinnerActualCompletedDayDay = (Spinner)findViewById(R.id.addTodoActualCompletedDayDay);
@@ -59,17 +59,17 @@ public class AddTodo extends AppCompatActivity {
         final RatingBar ratingBar = (RatingBar)findViewById(R.id.addTodoRatingBar);
 
 
-        Spinner addTodoCompletedDayYear =(Spinner)findViewById(R.id.addTodoCompletedDayYear);
+        Spinner addTodoCompletedDayYear =(Spinner)findViewById(R.id.addTodoDeadlineYear);
         Integer[] YearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
         ArrayAdapter<Integer> addTodoYearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, YearItems);
         addTodoCompletedDayYear.setAdapter(addTodoYearAdapter);
 
-        Spinner addTodoCompletedDayMonth =(Spinner)findViewById(R.id.addTodoCompletedDayMonth);
+        Spinner addTodoCompletedDayMonth =(Spinner)findViewById(R.id.addTodoDeadlineMonth);
         Integer[] MonthItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         ArrayAdapter<Integer> addTodoMonthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, MonthItems);
         addTodoCompletedDayMonth.setAdapter(addTodoMonthAdapter);
 
-        Spinner addTodoCompletedDayDay =(Spinner)findViewById(R.id.addTodoCompletedDayDay);
+        Spinner addTodoCompletedDayDay =(Spinner)findViewById(R.id.addTodoDeadlineDay);
         Integer[] DayItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
         ArrayAdapter<Integer> addTodoDayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DayItems);
         addTodoCompletedDayDay.setAdapter(addTodoDayAdapter);
@@ -85,13 +85,22 @@ public class AddTodo extends AppCompatActivity {
         addTodoActualCompletedDayDay.setAdapter(addTodoDayAdapter);
 
 
-        String todo = editTextAddTodoContent.getText().toString();
-        String deadline = spinnerCompletedDayYear.getSelectedItem().toString() + spinnerCompletedDayMonth.getSelectedItem().toString() + spinnerCompletedDayDay.getSelectedItem().toString();
-        String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + spinnerActualCompletedDayMonth.getSelectedItem().toString() + spinnerActualCompletedDayDay.getSelectedItem().toString();
-        String completed = String.valueOf(checkBoxisCompleted.isChecked());
-        String importance = String.valueOf(ratingBar.getRating());
+        final String todo = editTextAddTodoContent.getText().toString();
+        final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + spinnerDeadlineMonth.getSelectedItem().toString() + spinnerDeadlineDay.getSelectedItem().toString();
+        final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + spinnerActualCompletedDayMonth.getSelectedItem().toString() + spinnerActualCompletedDayDay.getSelectedItem().toString();
+        final String completed = String.valueOf(checkBoxisCompleted.isChecked());
+        final String importance = String.valueOf(ratingBar.getRating());
 
-        addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance);
+        Button addTodoButton = (Button)findViewById(R.id.addTodoButton);
+        addTodoButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // 데이터 송신
+
+                addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance);
+
+            }
+        });
     }
 
 

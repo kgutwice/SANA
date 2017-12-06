@@ -56,8 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         userID = getIntent().getStringExtra("userID");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -74,28 +73,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView = (ListView)findViewById(R.id.todayTodoListView);
         listView.setAdapter(todoAdapter);
 
-        // 아래 부분을 전부 투데이 요청으로 바꿔야함.
-        /*
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-        todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
-    */
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id){
                         Intent intent = new Intent(getApplicationContext(), ModifyTodo.class);
+                        intent.putExtra("userID", userID);
+                        TodoItem todoItem = (TodoItem)parent.getAdapter().getItem(i);
+                        String subjectName = todoItem.getSubject();
+                        intent.putExtra("subjectName", subjectName);
                         startActivity(intent);
                     }
                 }
         );
-
 
         ImageButton listButton = (ImageButton)findViewById(R.id.listButton);
 
@@ -103,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SemesterTodoList.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });
@@ -126,11 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                  getTodayTodoFromDB(userID, year, month, dayOfMonth, todoAdapter);
             }
         });
-
-        // 먼저 만들어지자 마자 오늘 데이터를 가져온다.
-        // 받아야 할 데이터는 TodoItem과 같다. 받은 데이터를 잘 넣는다.
-        // 넣기 전에 리스트뷰를 먼저 비우자.
-        // getTodayTodoFromDB(userID, 오늘 년도, 오늘 달, 오늘 날짜);
 
         getLectureFromDB(userID, "2017", "1");
         getIDandNameandSet(userID);

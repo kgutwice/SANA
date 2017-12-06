@@ -1,11 +1,14 @@
 package soen.kgutwice.sana;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -15,13 +18,14 @@ import java.util.ArrayList;
  * Created by ailab on 2017-11-27.
  */
 public class TodoAdapter extends BaseAdapter {
+
+
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList;
     private ArrayList<TodoItem> todoItemList = new ArrayList<>();
 
     // ListViewAdapter의 생성자
-    public TodoAdapter() {
 
-    }
+
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
@@ -59,6 +63,23 @@ public class TodoAdapter extends BaseAdapter {
         actualDeadlineTextView.setText(todoItem.getActualCompletedDay());
         completedCheckBox.setChecked(todoItem.getCompleted());
         importanceRatingBar.setRating(todoItem.getImportance());
+
+//        Button modifyButton = (Button) convertView.findViewById(R.id.modifySubject);
+//        modifyButton.setOnClickListener(new Button.OnClickListener() {
+//            public void onClick(View view) {
+//
+//                View parentRow = (View)view.getParent();
+//                ListView listView = (ListView)parentRow.getParent();
+//                final int position = listView.getPositionForView(parentRow);
+//
+//                Intent intent = new Intent(context, ModifySubject.class);
+//                //intent.putExtra("userID", userID);
+//                SubjectItem subjectItem = (SubjectItem)listView.getAdapter().getItem(position);
+//                String subjectName = subjectItem.getSubjectName();
+//                intent.putExtra("subjectName", subjectName);
+//                context.startActivity(intent);
+//            }
+//        });
 
         return convertView;
     }

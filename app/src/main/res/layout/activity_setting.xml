@@ -14,7 +14,7 @@
         android:layout_height="75dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="36dp"
-        android:text="푸시 알람 받지 않기"
+        android:text="푸시 알림 받지 않기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
