@@ -2,9 +2,20 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="과목명 순으로 정렬" />
-    <item android:title="마감기한 순으로 정렬"/>
-    <item android:title="실제마감일 순으로 정렬" />
-    <item android:title="미완료 우선 정렬" />
+    <item
+        android:id="@+id/subjectOrder"
+        android:title="과목명 순으로 정렬" />
+
+    <item
+        android:id="@+id/deadlineOrder"
+        android:title="마감기한 순으로 정렬"/>
+
+    <item
+        android:id="@+id/actualCompletedDayOrder"
+        android:title="실제마감일 순으로 정렬" />
+
+    <item
+        android:id="@+id/notCompletedOrder"
+        android:title="미완료 우선 정렬" />
 
 </menu>

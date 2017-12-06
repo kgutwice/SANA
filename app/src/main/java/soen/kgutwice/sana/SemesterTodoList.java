@@ -23,10 +23,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class SemesterTodoList extends AppCompatActivity {
 
     String userID;
     Response.Listener<String> responseListener;
+    JSONArray globalJSONObject;
+    int dataLength;
+    ArrayList<TodoItem> TodoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,6 @@ public class SemesterTodoList extends AppCompatActivity {
         // 여기는 한 학기의 모든 일정을 보는 곳입니다.
 
         final ListView listView;
-
-        userID = getIntent().getStringExtra("userID");
 
         listView = (ListView)findViewById(R.id.semesterTodoListView);
 
@@ -63,13 +66,16 @@ public class SemesterTodoList extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(s);
                     boolean success = jsonResponse.getBoolean("success");
                     JSONArray data = (JSONArray)jsonResponse.get("data");
+                    globalJSONObject = data;
                     final TodoAdapter todoAdapter;
                     todoAdapter = new TodoAdapter();
                     listView.setAdapter(todoAdapter);
 
                     if(success) {
+                        dataLength = data.length();
                         for(int i=0; i<data.length(); i++) {
                             JSONObject d = data.getJSONObject(i);
+
                             //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
                             Log.i("tt", d.toString());
                             todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"));
@@ -78,7 +84,7 @@ public class SemesterTodoList extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
-                        // 아니면 아무것도 없어도 뜸
+                        // 아무 리스트 없어도 뜸
                     }
                 } catch(JSONException e) {
                     e.printStackTrace();
@@ -159,11 +165,22 @@ public class SemesterTodoList extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.subjectList) {
-            Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
+        if (id == R.id.subjectOrder) {
+//            try {
+//                for(int i=0; i<dataLength; i++){
+//                    TodoList.add((TodoItem)globalJSONObject.getJSONObject(i))
+//                }
+//            } catch(Exception e){
+//
+//            }
+
             return true;
+        } else if(id == R.id.deadlineOrder){
+
+        } else if(id == R.id.actualCompletedDayOrder){
+
+        } else if(id == R.id.notCompletedOrder){
+
         }
 
         return super.onOptionsItemSelected(item);
