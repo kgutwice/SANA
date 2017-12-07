@@ -84,6 +84,7 @@ public class AddSubject extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(s);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success){
+
                                 finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SANA.iml" filepath="$PROJECT_DIR$/SANA.iml" />
+      <module fileurl="file://E:\Main\STUDY\seo\SANA\SANA.iml" filepath="E:\Main\STUDY\seo\SANA\SANA.iml" />
       <module fileurl="file://C:\SANA\.idea\SANA.iml" filepath="C:\SANA\.idea\SANA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

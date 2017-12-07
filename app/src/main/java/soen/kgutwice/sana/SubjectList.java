@@ -99,6 +99,7 @@ public class SubjectList extends AppCompatActivity {
                 }
         );
 
+        /*
         Button modifyButton = (Button)findViewById(R.id.modifySubject);
         modifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +121,7 @@ public class SubjectList extends AppCompatActivity {
                 intent.putExtra("ClassSemester", ClassSemester);
             }
         });
+        */
     }
 
     @Override
