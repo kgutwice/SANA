@@ -131,7 +131,9 @@ public class SubjectList extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if(id == R.id.addFromKutis){
-            // 이곳은 쿠티스와 연동하는 곳입니다.
+            Intent intent = new Intent(getApplicationContext(), KutisLoginActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

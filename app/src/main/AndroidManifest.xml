@@ -32,8 +32,11 @@
         <activity
             android:name=".SemesterTodoList"
             android:label="@string/todo_list"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".KutisLoginActivity"
+            android:label="@string/add_from_kutis"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ModifyTodo"
             android:label="@string/modify_todo"
