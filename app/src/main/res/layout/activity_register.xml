@@ -33,11 +33,15 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp" />
 
-        <TextView
-            android:id="@+id/idCheckMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+    <TextView
+        android:id="@+id/idCheckMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        />
+
     <EditText
         android:id="@+id/pwText"
         android:layout_width="match_parent"
@@ -64,7 +68,10 @@
             android:id="@+id/pwCheckMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
 
     <EditText
         android:id="@+id/nameText"

@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if(success) {
                                 idChecker = false;
                                 checkIdMessage.setVisibility(View.VISIBLE);
-                                checkIdMessage.setText("아이디가 이미 존제합니다.");
+                                checkIdMessage.setText("아이디가 이미 존재합니다.");
                             }
                             else{
                                 idChecker = true;
