@@ -33,15 +33,13 @@ public class KutisLoginActivity extends AppCompatActivity {
         final EditText idText = (EditText) findViewById(R.id.idText);
         final EditText pwText = (EditText) findViewById(R.id.pwText);
         final Button loginButton = (Button) findViewById(R.id.loginButton);
-        final TextView registerButton = (TextView) findViewById(R.id.registerButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String userId = idText.getText().toString();
                 final String userPw = pwText.getText().toString();
-                Log.i("tt", userId);
-                Log.i("tt", userPw);
+
                 if (userId.equals("") || userId.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(KutisLoginActivity.this);
                     builder.setMessage("아이디 또는 비밀번호를 확인하세요")
@@ -54,11 +52,11 @@ public class KutisLoginActivity extends AppCompatActivity {
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //try {
+                        try {
                             Log.i("test", response.toString());
-                          //  JSONObject jsonResponse = new JSONObject(response);
-                            //JSONArray data = (JSONArray) jsonResponse.get("data");
-                            /*
+                           JSONObject jsonResponse = new JSONObject(response);
+                            JSONArray data = (JSONArray) jsonResponse.get("data");
+
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject d = data.getJSONObject(i);
 
@@ -84,7 +82,7 @@ public class KutisLoginActivity extends AppCompatActivity {
                                 RequestQueue queue = Volley.newRequestQueue(KutisLoginActivity.this);
                                 queue.add(addSubjectRequest);
                             }
-
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
 
@@ -95,7 +93,7 @@ public class KutisLoginActivity extends AppCompatActivity {
                                     .show();
                             return;
                         }
-                        */
+
                     }
                 };
 

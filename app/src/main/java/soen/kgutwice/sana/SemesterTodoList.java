@@ -339,7 +339,7 @@ public class SemesterTodoList extends AppCompatActivity {
 
             return true;
 
-        } else if(id == R.id.notCompletedOrder){
+        } else if(id == R.id.CompletedOrder){
 
             listView.setAdapter(null);
             final TodoAdapter todoAdapter;

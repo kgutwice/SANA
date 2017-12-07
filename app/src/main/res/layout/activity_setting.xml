@@ -7,26 +7,14 @@
     android:layout_height="match_parent">
 
 
-
-    <CheckBox
-        android:id="@+id/pushChecked"
-        android:layout_width="205dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="36dp"
-        android:text="푸시 알림 받지 않기"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <CheckBox
         android:id="@+id/dontLookPastEventChecked"
         android:layout_width="205dp"
         android:layout_height="75dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
-        android:text="지난 일정 보지 않기"
+        android:layout_marginStart="108dp"
+        android:text="완료 일정 보지 않기"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pushChecked" />
+        tools:layout_editor_absoluteY="79dp" />
 
     <Button
         android:id="@+id/settingButton"

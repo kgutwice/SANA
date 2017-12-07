@@ -50,8 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                                     JSONObject jsonResponse = new JSONObject(response);
                                     boolean success = jsonResponse.getBoolean("success");
                                     if(success) {
+                                        AllData ad = (AllData)getApplication();
+                                        ad.setDontLookPastEventChecked(jsonResponse.getInt("lastPlan"));
+                                        ad.setUserId(userId);
                                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.putExtra("userID", userId);
                                         LoginActivity.this.startActivity(intent);

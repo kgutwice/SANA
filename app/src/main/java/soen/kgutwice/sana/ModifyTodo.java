@@ -111,10 +111,14 @@ public class ModifyTodo extends AppCompatActivity {
                 final String todo = editTextModifyTodoContent.getText().toString();
                 final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
                 final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
-                final String completed = String.valueOf(checkBoxisCompleted.isChecked());
+                final String completed;
+                if(checkBoxisCompleted.isChecked())
+                    completed = "1";
+                else
+                    completed = "0";
                 final String importance = String.valueOf(ratingBar.getRating());
 
-                modifyTodoToDB(no, userID, todo, subjectName, deadline, actualCompletedDay, completed, importance, "2017", "1");
+                modifyTodoToDB(no, userID, todo, subjectName, deadline, actualCompletedDay, completed, importance, "2017", "2");
             }
         });
     }

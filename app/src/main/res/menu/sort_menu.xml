@@ -15,7 +15,7 @@
         android:title="실제마감일 순으로 정렬" />
 
     <item
-        android:id="@+id/notCompletedOrder"
-        android:title="미완료 우선 정렬" />
+        android:id="@+id/CompletedOrder"
+        android:title="완료 우선 정렬" />
 
 </menu>
