@@ -86,8 +86,8 @@ public class AddTodo extends AppCompatActivity {
 
 
         final String todo = editTextAddTodoContent.getText().toString();
-        final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + spinnerDeadlineMonth.getSelectedItem().toString() + spinnerDeadlineDay.getSelectedItem().toString();
-        final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + spinnerActualCompletedDayMonth.getSelectedItem().toString() + spinnerActualCompletedDayDay.getSelectedItem().toString();
+        final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
+        final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
         final String completed = String.valueOf(checkBoxisCompleted.isChecked());
         final String importance = String.valueOf(ratingBar.getRating());
 

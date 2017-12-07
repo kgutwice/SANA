@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final HashMap<String, Object> todo = new HashMap<String, Object>();
         final ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 
-        deadLine = Integer.toString(year) + Integer.toString(month+1) + Integer.toString(day);
+        deadLine = Integer.toString(year) + "." + Integer.toString(month+1) + "." + Integer.toString(day);
 
         Log.i("tt", deadLine);
 
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-        MainActivityTodoListRequest mainActivityTodoListRequest = new MainActivityTodoListRequest("sms2831",deadLine,responseListener);
+        MainActivityTodoListRequest mainActivityTodoListRequest = new MainActivityTodoListRequest(userID, deadLine, responseListener);
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(mainActivityTodoListRequest);

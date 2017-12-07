@@ -24,14 +24,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SemesterTodoList extends AppCompatActivity {
 
+    static boolean subjectOrderCheck = true; // true이면 오름차순 false이면 내림차순
+    static boolean deadlineOrder = true; // true이면 오름차순 false이면 내림차순
+    static boolean actualCompletedDayOrder = true; // true이면 오름차순 false이면 내림차순
+    static boolean notCompletedOrder = true; // true이면 미완료 먼저 false이면 완료 먼저
+
     String userID;
     Response.Listener<String> responseListener;
-    JSONArray globalJSONObject;
     int dataLength;
     ArrayList<TodoItem> TodoList;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +53,6 @@ public class SemesterTodoList extends AppCompatActivity {
         userID = getIntent().getStringExtra("userID");
 
         // 여기는 한 학기의 모든 일정을 보는 곳입니다.
-
-        final ListView listView;
 
         listView = (ListView)findViewById(R.id.semesterTodoListView);
 
@@ -66,15 +74,28 @@ public class SemesterTodoList extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(s);
                     boolean success = jsonResponse.getBoolean("success");
                     JSONArray data = (JSONArray)jsonResponse.get("data");
-                    globalJSONObject = data;
                     final TodoAdapter todoAdapter;
                     todoAdapter = new TodoAdapter();
                     listView.setAdapter(todoAdapter);
+
+                    TodoList = new ArrayList<>();
 
                     if(success) {
                         dataLength = data.length();
                         for(int i=0; i<data.length(); i++) {
                             JSONObject d = data.getJSONObject(i);
+
+                            TodoItem todoItem = new TodoItem();
+                            JSONObject todo = data.getJSONObject(i);
+                            todoItem.setTodo(todo.getString("todoName"));
+                            todoItem.setSubject(todo.getString("subjectName"));
+                            todoItem.setDeadline(todo.getString("deadLine"));
+                            todoItem.setActualCompletedDay(todo.getString("actualDeadLine"));
+                            todoItem.setCompleted(todo.getBoolean("completed"));
+                            todoItem.setImportance(todo.getInt("importance"));
+
+
+                            TodoList.add(todoItem);
 
                             //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
                             Log.i("tt", d.toString());
@@ -84,7 +105,7 @@ public class SemesterTodoList extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
-                        // 아무 리스트 없어도 뜸
+                        // 에러가 아니여도 아무 리스트도 받아오지 못해도 뜸
                     }
                 } catch(JSONException e) {
                     e.printStackTrace();
@@ -147,7 +168,6 @@ public class SemesterTodoList extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
@@ -166,25 +186,184 @@ public class SemesterTodoList extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.subjectOrder) {
-//            try {
-//                for(int i=0; i<dataLength; i++){
-//                    TodoList.add((TodoItem)globalJSONObject.getJSONObject(i))
-//                }
-//            } catch(Exception e){
-//
-//            }
+            listView.setAdapter(null);
+            final TodoAdapter todoAdapter;
+            todoAdapter = new TodoAdapter();
+            listView.setAdapter(todoAdapter);
+
+            ArrayList<String> subjects = new ArrayList<>();
+            Map<Integer, String> mapping = new HashMap<>();
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todo = TodoList.get(i);
+                mapping.put(i, todo.getSubject());
+                subjects.add(todo.getSubject());
+            }
+
+            Collections.sort(subjects, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    return s1.compareToIgnoreCase(s2);
+                }
+            });
+
+            ArrayList<Integer> order = new ArrayList<>();
+            for(int i=0; i<dataLength; i++){ // 전체 iter
+                for(int j=0; j<dataLength; j++){ // 검색 iter
+                    if(subjects.get(i) == mapping.get(j)){
+                        order.add(j);
+                    }
+                }
+            }
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todoItem;
+                int j = order.get(i);
+                todoItem = TodoList.get(j);
+                todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance());
+            }
 
             return true;
+
         } else if(id == R.id.deadlineOrder){
+
+            listView.setAdapter(null);
+            final TodoAdapter todoAdapter;
+            todoAdapter = new TodoAdapter();
+            listView.setAdapter(todoAdapter);
+
+            ArrayList<String> deadlines = new ArrayList<>();
+            Map<Integer, String> mapping = new HashMap<>();
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todo = TodoList.get(i);
+                String deadline = todo.getDeadline();
+                String[] yearMonthDay = deadline.split(".");
+                String year = yearMonthDay[0];
+                String month = yearMonthDay[1];
+                String day = yearMonthDay[2];
+                if (Integer.parseInt(month) < 10){
+                    month = "0" + month;
+                }
+                if (Integer.parseInt(day) < 10){
+                    day = "0" + day;
+                }
+                deadline = year + month + day;
+
+                mapping.put(i, deadline);
+                deadlines.add(deadline);
+            }
+
+            Collections.sort(deadlines, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    return s1.compareToIgnoreCase(s2);
+                }
+            });
+
+            ArrayList<Integer> order = new ArrayList<>();
+            for(int i=0; i<dataLength; i++){ // 전체 iter
+                for(int j=0; j<dataLength; j++){ // 검색 iter
+                    if(deadlines.get(i) == mapping.get(j)){
+                        order.add(j);
+                    }
+                }
+            }
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todoItem;
+                int j = order.get(i);
+                todoItem = TodoList.get(j);
+                todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance());
+            }
+
+            return true;
 
         } else if(id == R.id.actualCompletedDayOrder){
 
+            listView.setAdapter(null);
+            final TodoAdapter todoAdapter;
+            todoAdapter = new TodoAdapter();
+            listView.setAdapter(todoAdapter);
+
+            ArrayList<String> completedDays = new ArrayList<>();
+            Map<Integer, String> mapping = new HashMap<>();
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todo = TodoList.get(i);
+                String completedDay = todo.getActualCompletedDay();
+                String[] yearMonthDay = completedDay.split(".");
+                String year = yearMonthDay[0];
+                String month = yearMonthDay[1];
+                String day = yearMonthDay[2];
+                if (Integer.parseInt(month) < 10){
+                    month = "0" + month;
+                }
+                if (Integer.parseInt(day) < 10){
+                    day = "0" + day;
+                }
+                completedDay = year + month + day;
+
+                mapping.put(i, completedDay);
+                completedDays.add(completedDay);
+            }
+
+            Collections.sort(completedDays, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    return s1.compareToIgnoreCase(s2);
+                }
+            });
+
+            ArrayList<Integer> order = new ArrayList<>();
+            for(int i=0; i<dataLength; i++){ // 전체 iter
+                for(int j=0; j<dataLength; j++){ // 검색 iter
+                    if(completedDays.get(i) == mapping.get(j)){
+                        order.add(j);
+                    }
+                }
+            }
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todoItem;
+                int j = order.get(i);
+                todoItem = TodoList.get(j);
+                todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance());
+            }
+
+            return true;
+
         } else if(id == R.id.notCompletedOrder){
 
+            listView.setAdapter(null);
+            final TodoAdapter todoAdapter;
+            todoAdapter = new TodoAdapter();
+            listView.setAdapter(todoAdapter);
+
+            Map<Integer, Boolean> mapping = new HashMap<>();
+
+            for(int i=0; i<dataLength; i++){
+                TodoItem todo = TodoList.get(i);
+                boolean completed = todo.getCompleted();
+                mapping.put(i, completed);
+            }
+
+            for(int i=0; i<dataLength; i++){
+                if(mapping.get(i) == true){
+                    TodoItem todoItem = TodoList.get(i);
+                    todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance());
+                }
+            }
+
+            for(int i=0; i<dataLength; i++){
+                if(mapping.get(i) == false){
+                    TodoItem todoItem = TodoList.get(i);
+                    todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance());
+                }
+            }
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }
