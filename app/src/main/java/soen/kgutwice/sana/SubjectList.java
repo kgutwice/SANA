@@ -87,7 +87,9 @@ public class SubjectList extends AppCompatActivity {
                         intent.putExtra("userID", userID);
                         SubjectItem subjectItem = (SubjectItem)parent.getAdapter().getItem(i);
                         String subjectName = subjectItem.getSubjectName();
+                        String subjectProfessor = subjectItem.getSubjectProfessor();
                         intent.putExtra("subjectName", subjectName);
+                        intent.putExtra("subjectProfessor", subjectProfessor);
                         startActivity(intent);
                     }
                 }

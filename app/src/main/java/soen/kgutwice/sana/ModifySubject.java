@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,14 +38,16 @@ public class ModifySubject extends AppCompatActivity {
         setContentView(R.layout.activity_modify_subject);
 
         //userID = getIntent().getStringExtra("userID");
-        String asdf = getIntent().getStringExtra("subjectName");
-        Toast.makeText(getApplicationContext(), asdf, Toast.LENGTH_LONG).show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final EditText editTextSubjectName = (EditText)findViewById(R.id.modifySubjectName);
+        editTextSubjectName.setText(getIntent().getStringExtra("subjectName"));
+
         final EditText editTextSubjectProfessor = (EditText)findViewById(R.id.modifySubjectProfessor);
+        editTextSubjectProfessor.setText(getIntent().getStringExtra("subjectProfessor"));
+
         final Spinner spinnerLectureDayOfTheWeek = (Spinner)findViewById(R.id.modifySubjectLectureDayOfTheWeek);
         final Spinner spinnerStartTime = (Spinner)findViewById(R.id.modifySubjectStartTime);
         final Spinner spinnerEndTime = (Spinner)findViewById(R.id.modifySubjectEndTime);

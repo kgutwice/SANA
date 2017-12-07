@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
         final ListView listView;
         TodoAdapter todoAdapter;
 
@@ -226,41 +224,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     void getIDandNameandSet(final String userID){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="아이디와 이름을 요청하는 URL입니다.";
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/getIDandName.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try{
                             JSONObject reader = new JSONObject(response);
-                            String receiveUserID = reader.getString("userID");
-                            String receiveUserName = reader.getString("userName");
-                            TextView idTextView = (TextView)findViewById(R.id.userID);
+                            boolean success = reader.getBoolean("success");
+                            JSONArray data = (JSONArray)reader.get("data");
+                            TextView idTextView = (TextView) findViewById(R.id.userID);
                             TextView nameTextView = (TextView)findViewById(R.id.userName);
-                            idTextView.setText(receiveUserID);
-                            nameTextView.setText(receiveUserName);
+                            if(success) {
+                                JSONObject row = data.getJSONObject(0);
+                                idTextView.setText(row.getString("userID"));
+                                nameTextView.setText(row.getString("userName"));
+                            } else {
 
+                            }
                         } catch(Exception e){
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                }){
+                    @Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("userID", userID);
 
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("userID", userID);
-
-                return params;
-            }
-        };
+                        return params;
+                    }
+                };
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }

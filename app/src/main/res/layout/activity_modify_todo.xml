@@ -80,7 +80,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoDeadlineMonth"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
@@ -89,7 +89,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoDeadlineDay"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="24dp"
@@ -119,7 +119,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoActualCompletedDayMonth"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/modifyTodoActualCompletedDayYear"
@@ -127,7 +127,7 @@
 
     <Spinner
         android:id="@+id/modifyTodoActualCompletedDayDay"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/modifyTodoActualCompletedDayMonth"

@@ -85,17 +85,23 @@ public class AddTodo extends AppCompatActivity {
         addTodoActualCompletedDayDay.setAdapter(addTodoDayAdapter);
 
 
-        final String todo = editTextAddTodoContent.getText().toString();
-        final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
-        final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
-        final String completed = String.valueOf(checkBoxisCompleted.isChecked());
-        final String importance = String.valueOf(ratingBar.getRating());
+
+
 
         Button addTodoButton = (Button)findViewById(R.id.addTodoButton);
         addTodoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 // 데이터 송신
+
+                final String todo = editTextAddTodoContent.getText().toString();
+                final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
+                final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
+                final String completed = String.valueOf(checkBoxisCompleted.isChecked());
+                final String importance = String.valueOf(ratingBar.getRating());
+
+                Toast.makeText(getApplicationContext(), todo+deadline, Toast.LENGTH_LONG).show();
+
 
                 addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance);
 
@@ -116,8 +122,7 @@ public class AddTodo extends AppCompatActivity {
                             JSONObject reader = new JSONObject(response);
                             boolean success = reader.getBoolean("success");
                             if(success) {
-                                Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                             }
