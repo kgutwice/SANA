@@ -87,6 +87,7 @@ public class SemesterTodoList extends AppCompatActivity {
 
                             TodoItem todoItem = new TodoItem();
                             JSONObject todo = data.getJSONObject(i);
+                            todoItem.setNo(todo.getString("no"));
                             todoItem.setTodo(todo.getString("todoName"));
                             todoItem.setSubject(todo.getString("subjectName"));
                             todoItem.setDeadline(todo.getString("deadLine"));
@@ -100,7 +101,7 @@ public class SemesterTodoList extends AppCompatActivity {
 
                             //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
                             Log.i("tt", d.toString());
-                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"), d.getInt("takeClassYear"), d.getInt("takeClassSemester"));
+                            todoAdapter.addItem(d.getString("no"), d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"), d.getInt("takeClassYear"), d.getInt("takeClassSemester"));
                         }
                         todoAdapter.notifyDataSetChanged();
 
@@ -127,6 +128,8 @@ public class SemesterTodoList extends AppCompatActivity {
                         intent.putExtra("userID", userID);
                         TodoItem todoItem = (TodoItem)parent.getAdapter().getItem(i);
                         String subjectName = todoItem.getSubject();
+                        String no = todoItem.getNo();
+                        intent.putExtra("no", no);
                         intent.putExtra("subjectName", subjectName);
                         startActivity(intent);
                     }
@@ -221,7 +224,7 @@ public class SemesterTodoList extends AppCompatActivity {
                 TodoItem todoItem;
                 int j = order.get(i);
                 todoItem = TodoList.get(j);
-                todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
+                todoAdapter.addItem(todoItem.getNo(), todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
             }
 
             return true;
@@ -277,7 +280,7 @@ public class SemesterTodoList extends AppCompatActivity {
                 TodoItem todoItem;
                 int j = order.get(i);
                 todoItem = TodoList.get(j);
-                todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
+                todoAdapter.addItem(todoItem.getNo(), todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
             }
 
             return true;
@@ -331,7 +334,7 @@ public class SemesterTodoList extends AppCompatActivity {
                 TodoItem todoItem;
                 int j = order.get(i);
                 todoItem = TodoList.get(j);
-                todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
+                todoAdapter.addItem(todoItem.getNo(), todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
             }
 
             return true;
@@ -354,14 +357,14 @@ public class SemesterTodoList extends AppCompatActivity {
             for(int i=0; i<dataLength; i++){
                 if(mapping.get(i) == true){
                     TodoItem todoItem = TodoList.get(i);
-                    todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
+                    todoAdapter.addItem(todoItem.getNo(), todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
                 }
             }
 
             for(int i=0; i<dataLength; i++){
                 if(mapping.get(i) == false){
                     TodoItem todoItem = TodoList.get(i);
-                    todoAdapter.addItem(todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
+                    todoAdapter.addItem(todoItem.getNo(), todoItem.getTodo(), todoItem.getSubject(), todoItem.getDeadline(), todoItem.getActualCompletedDay(), todoItem.getCompleted(), todoItem.getImportance(), todoItem.getClassYear(), todoItem.getClassSemester());
                 }
             }
             return true;

@@ -35,6 +35,7 @@ import java.util.Map;
 public class ModifyTodo extends AppCompatActivity {
 
     String userID;
+    String subjectName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,9 @@ public class ModifyTodo extends AppCompatActivity {
 
         final String getUserID = getIntent().getStringExtra("userID");
         userID = getUserID;
-        final String subjectName = getIntent().getStringExtra("subjectName");
+        subjectName = getIntent().getStringExtra("subjectName");
 
-        Toast.makeText(getApplicationContext(), userID + subjectName, Toast.LENGTH_LONG).show();
+        final String no = getIntent().getStringExtra("no");
 
         final TextView textViewModifyTodoSubject = (TextView)findViewById(R.id.modifyTodoSubject);
         textViewModifyTodoSubject.setText(subjectName);
@@ -99,11 +100,7 @@ public class ModifyTodo extends AppCompatActivity {
         ArrayAdapter<Integer> modifyTodoCompletedDayDayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayDayItems);
         modifyTodoActualCompletedDayDay.setAdapter(modifyTodoCompletedDayDayAdapter);
 
-        final String todo = editTextModifyTodoContent.getText().toString();
-        final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + spinnerDeadlineMonth.getSelectedItem().toString() + spinnerDeadlineDay.getSelectedItem().toString();
-        final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + spinnerActualCompletedDayMonth.getSelectedItem().toString() + spinnerActualCompletedDayDay.getSelectedItem().toString();
-        final String completed = String.valueOf(checkBoxisCompleted.isChecked());
-        final String importance = String.valueOf(ratingBar.getRating());
+
 
         Button modifyTodoButton = (Button)findViewById(R.id.modifyTodoButton);
         modifyTodoButton.setOnClickListener(new View.OnClickListener(){
@@ -111,7 +108,13 @@ public class ModifyTodo extends AppCompatActivity {
             public void onClick(View view) {
                 // 데이터 송신
 
-                modifyTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance);
+                final String todo = editTextModifyTodoContent.getText().toString();
+                final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
+                final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
+                final String completed = String.valueOf(checkBoxisCompleted.isChecked());
+                final String importance = String.valueOf(ratingBar.getRating());
+
+                modifyTodoToDB(no, userID, todo, subjectName, deadline, actualCompletedDay, completed, importance, "2017", "1");
             }
         });
     }
@@ -141,9 +144,11 @@ public class ModifyTodo extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void modifyTodoToDB(final String userID, final String todo, final String subjectName, final String deadline, final String actualCompletedDay, final String completed, final String importance){
+    void modifyTodoToDB(final String no, final String userID, final String todo, final String subjectName, final String deadline, final String actualCompletedDay, final String completed, final String importance, final String takeClassYear, final String takeClassSemester){
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://203.249.17.196:2013/ms/android/SANA_connector/modifyTodo.php";
+
+        Toast.makeText(getApplicationContext(), no + " " + userID + " " + subjectName + " " + deadline + " " + actualCompletedDay + " " + completed + " " + importance + " " + takeClassYear + " " + takeClassSemester, Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -152,10 +157,11 @@ public class ModifyTodo extends AppCompatActivity {
                         try{
                             JSONObject reader = new JSONObject(response);
                             boolean success = reader.getBoolean("success");
+
                             if(success) {
                                 finish();
                             } else {
-                                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "요청이 실패했습니다. 1", Toast.LENGTH_LONG).show();
                             }
                         } catch(Exception e){
                             e.printStackTrace();
@@ -165,12 +171,13 @@ public class ModifyTodo extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "요청이 실패했습니다. 2", Toast.LENGTH_LONG).show();
             }
         }){
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
+                params.put("no", no);
                 params.put("userID", userID);
                 params.put("todo", todo);
                 params.put("subjectName", subjectName);
@@ -178,6 +185,9 @@ public class ModifyTodo extends AppCompatActivity {
                 params.put("actualCompletedDay", actualCompletedDay);
                 params.put("completed", completed);
                 params.put("importance", importance);
+                params.put("takeClassYear", takeClassYear);
+                params.put("takeClassSemester", takeClassSemester);
+
 
                 return params;
             }

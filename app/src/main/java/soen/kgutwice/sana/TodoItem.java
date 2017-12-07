@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 
 public class TodoItem {
 
+    String no;
     String todo;
     String subject;
     String deadline;
@@ -15,8 +16,15 @@ public class TodoItem {
     int ClassYear;
     int ClassSemester;
     Boolean completed; // True이면 완료된것.
-
     float importance;
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 
     public int getClassYear(){ return ClassYear; }
 

@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         intent.putExtra("userID", userID);
                         TodoItem todoItem = (TodoItem)parent.getAdapter().getItem(i);
                         String subjectName = todoItem.getSubject();
+                        String no = todoItem.getNo();
+                        intent.putExtra("no", no);
                         intent.putExtra("subjectName", subjectName);
                         startActivity(intent);
                     }
@@ -211,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             JSONObject d = data.getJSONObject(i);
                             //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
 
-                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"),d.getInt("takeClassYear"), d.getInt("takeClassSemester"));
+                            todoAdapter.addItem(d.getString("no"), d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"),d.getInt("takeClassYear"), d.getInt("takeClassSemester"));
 
                         }
                         todoAdapter.notifyDataSetChanged();
