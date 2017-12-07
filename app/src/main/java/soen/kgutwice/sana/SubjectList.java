@@ -57,7 +57,7 @@ public class SubjectList extends AppCompatActivity {
                             JSONObject d = data.getJSONObject(i);
                             Log.i("tt", d.toString());
                             String courseTime = "" + d.getString("lectureDayOfTheWeek") + "요일, " + d.getString("startTime") + " ~ " + d.getString("endTime");
-                            subjectAdapter.addItem(d.getString("subjectName"), d.getString("subjectProfessor"), courseTime);
+                            subjectAdapter.addItem(d.getString("subjectName"), d.getString("subjectProfessor"), courseTime, d.getString("takeClassYear"), d.getString("takeClassSemester"));
                         }
                         subjectAdapter.notifyDataSetChanged();
                         Log.i("test", subjectAdapter.toString());
@@ -87,9 +87,11 @@ public class SubjectList extends AppCompatActivity {
                         intent.putExtra("userID", userID);
                         SubjectItem subjectItem = (SubjectItem)parent.getAdapter().getItem(i);
                         String subjectName = subjectItem.getSubjectName();
-                        String subjectProfessor = subjectItem.getSubjectProfessor();
+                        String ClassYear = subjectItem.getClassYear();
+                        String ClassSemester = subjectItem.getClassSemester();
                         intent.putExtra("subjectName", subjectName);
-                        intent.putExtra("subjectProfessor", subjectProfessor);
+                        intent.putExtra("ClassYear", ClassYear);
+                        intent.putExtra("ClassSemester", ClassSemester);
                         startActivity(intent);
                     }
                 }

@@ -37,7 +37,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         userID = getIntent().getStringExtra("userID");
-
-        Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -103,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), year + " " + month + " " + dayOfMonth, Toast.LENGTH_LONG).show(); // Example : 2017 10 30
-
                 listView.setAdapter(null);
 
                 TodoAdapter todoAdapter;
@@ -118,6 +116,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        TodoAdapter defaultTodoAdapter;
+        defaultTodoAdapter = new TodoAdapter();
+        listView.setAdapter(defaultTodoAdapter);
+        DecimalFormat df = new DecimalFormat("00");
+        Calendar currentCal = Calendar.getInstance();
+        currentCal.add(currentCal.DATE, 0);
+        String year = Integer.toString(currentCal.get(Calendar.YEAR));
+        String month = df.format(currentCal.get(Calendar.MONTH)+1);
+        String day = df.format(currentCal.get(Calendar.DAY_OF_MONTH));
+
+        Toast.makeText(getApplicationContext(), year+month+day, Toast.LENGTH_LONG).show();
+
+        getTodayTodoFromDB(userID, Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), defaultTodoAdapter);
         getLectureFromDB(userID, "2017", "1");
         getIDandNameandSet(userID);
     }
@@ -200,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             JSONObject d = data.getJSONObject(i);
                             //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
 
-                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"));
+                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"),d.getInt("takeClassYear"), d.getInt("takeClassSemester"));
 
                         }
                         todoAdapter.notifyDataSetChanged();
@@ -218,7 +229,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(mainActivityTodoListRequest);
-
 
     }
 

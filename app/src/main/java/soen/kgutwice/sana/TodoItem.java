@@ -12,8 +12,19 @@ public class TodoItem {
     String subject;
     String deadline;
     String actualCompletedDay;
+    int ClassYear;
+    int ClassSemester;
     Boolean completed; // True이면 완료된것.
+
     float importance;
+
+    public int getClassYear(){ return ClassYear; }
+
+    public void setClassYear(int Year){ this.ClassYear = Year;}
+
+    public int getClassSemester(){ return ClassSemester; }
+
+    public void setClassSemester(int Semester){ this.ClassSemester = Semester;}
 
     public String getTodo() {
         return todo;

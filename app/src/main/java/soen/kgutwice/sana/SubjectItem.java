@@ -9,6 +9,16 @@ public class SubjectItem {
     String subjectName;
     String subjectProfessor;
     String subjectcourseTime;
+    String ClassYear;
+    String ClassSemester;
+
+    public String getClassYear(){ return ClassYear; };
+
+    public void setClassYear(String Year){this.ClassYear = Year;}
+
+    public String getClassSemester(){ return ClassSemester; };
+
+    public void setClassSemester(String Semester){this.ClassSemester = Semester;}
 
     public String getSubjectName() {
         return subjectName;

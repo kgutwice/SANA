@@ -39,7 +39,8 @@ public class AddTodo extends AppCompatActivity {
 
         final String userID = getIntent().getStringExtra("userID");
         final String subjectName = getIntent().getStringExtra("subjectName");
-
+        final String ClassYear = getIntent().getStringExtra("ClassYear");
+        final String ClassSemester = getIntent().getStringExtra("ClassSemester");
         Toast.makeText(getApplicationContext(), subjectName + userID, Toast.LENGTH_LONG).show();
 
         final TextView textViewAddTodoSubject = (TextView)findViewById(R.id.addTodoSubject);
@@ -87,72 +88,51 @@ public class AddTodo extends AppCompatActivity {
 
 
 
-
         Button addTodoButton = (Button)findViewById(R.id.addTodoButton);
         addTodoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 // 데이터 송신
-
+                //
                 final String todo = editTextAddTodoContent.getText().toString();
                 final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
                 final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
                 final String completed = String.valueOf(checkBoxisCompleted.isChecked());
                 final String importance = String.valueOf(ratingBar.getRating());
 
-                Toast.makeText(getApplicationContext(), todo+deadline, Toast.LENGTH_LONG).show();
-
-
-                addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance);
+                Log.i("testtesttest", userID+ todo+ subjectName+ deadline+ actualCompletedDay+ completed+ importance);
+                addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance, ClassYear, ClassSemester);
 
             }
         });
     }
 
 
-    void addTodoToDB(final String userID, final String todo, final String subjectName, final String deadline, final String actualCompletedDay, final String completed, final String importance){
-        RequestQueue queue = Volley.newRequestQueue(this);
+    void addTodoToDB(final String userID, final String todo, final String subjectName, final String deadline, final String actualCompletedDay, final String completed, final String importance, final String takeClassYear, final String takeClassSemester){
+
         String url ="http://203.249.17.196:2013/ms/android/SANA_connector/addTodo.php";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject reader = new JSONObject(response);
-                            boolean success = reader.getBoolean("success");
-                            if(success) {
-                                finish();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
-                            }
-                        } catch(Exception e){
-                            e.printStackTrace();
-                        }
-
+        Response.Listener<String> responseListener = new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.i("test", response.toString());
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if(success){
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("userID", userID);
-                params.put("todo", todo);
-                params.put("subjectName", subjectName);
-                params.put("deadline", deadline);
-                params.put("actualCompletedDay", actualCompletedDay);
-                params.put("completed", completed);
-                params.put("importance", importance);
-
-                return params;
+                } catch(JSONException e) {
+                    e.printStackTrace();
+                }
             }
         };
         // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        AddTodoRequest addTodoRequest = new AddTodoRequest(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance,  takeClassYear, takeClassSemester, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(AddTodo.this);
+        queue.add(addTodoRequest);
     }
 
 }
