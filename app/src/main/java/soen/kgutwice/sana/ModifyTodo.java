@@ -83,34 +83,34 @@ public class ModifyTodo extends AppCompatActivity {
         final RatingBar ratingBar = (RatingBar)findViewById(R.id.modifyTodoRatingBar);
 
 
-        Spinner modifyTodoCompletedDayYear = (Spinner)findViewById(R.id.modifyTodoDeadlineYear);
-        Integer[] deadlineYearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
-        ArrayAdapter<Integer> modifyTodoDeadlineYearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deadlineYearItems);
+        final Spinner modifyTodoCompletedDayYear = (Spinner)findViewById(R.id.modifyTodoDeadlineYear);
+        final Integer[] deadlineYearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
+        final ArrayAdapter<Integer> modifyTodoDeadlineYearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deadlineYearItems);
         modifyTodoCompletedDayYear.setAdapter(modifyTodoDeadlineYearAdapter);
 
-        Spinner modifyTodoCompletedDayMonth = (Spinner)findViewById(R.id.modifyTodoDeadlineMonth);
-        Integer[] deadlineMonthItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-        ArrayAdapter<Integer> modifyTodoDeadlineMonthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deadlineMonthItems);
+        final Spinner modifyTodoCompletedDayMonth = (Spinner)findViewById(R.id.modifyTodoDeadlineMonth);
+        final Integer[] deadlineMonthItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        final ArrayAdapter<Integer> modifyTodoDeadlineMonthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deadlineMonthItems);
         modifyTodoCompletedDayMonth.setAdapter(modifyTodoDeadlineMonthAdapter);
 
-        Spinner modifyTodoCompletedDayDay = (Spinner)findViewById(R.id.modifyTodoDeadlineDay);
-        Integer[] deadlineDayItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
-        ArrayAdapter<Integer> modifyTodoDeadlineDayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deadlineDayItems);
+        final Spinner modifyTodoCompletedDayDay = (Spinner)findViewById(R.id.modifyTodoDeadlineDay);
+        final Integer[] deadlineDayItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+        final ArrayAdapter<Integer> modifyTodoDeadlineDayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, deadlineDayItems);
         modifyTodoCompletedDayDay.setAdapter(modifyTodoDeadlineDayAdapter);
 
-        Spinner modifyTodoActualCompletedDayYear = (Spinner)findViewById(R.id.modifyTodoActualCompletedDayYear);
-        Integer[] completedDayYearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
-        ArrayAdapter<Integer> modifyTodoCompletedDayYearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayYearItems);
+        final Spinner modifyTodoActualCompletedDayYear = (Spinner)findViewById(R.id.modifyTodoActualCompletedDayYear);
+        final Integer[] completedDayYearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
+        final ArrayAdapter<Integer> modifyTodoCompletedDayYearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayYearItems);
         modifyTodoActualCompletedDayYear.setAdapter(modifyTodoCompletedDayYearAdapter);
 
-        Spinner modifyTodoActualCompletedDayMonth = (Spinner)findViewById(R.id.modifyTodoActualCompletedDayMonth);
-        Integer[] completedDayMonthItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-        ArrayAdapter<Integer> modifyTodoCompletedDayMonthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayMonthItems);
+        final Spinner modifyTodoActualCompletedDayMonth = (Spinner)findViewById(R.id.modifyTodoActualCompletedDayMonth);
+        final Integer[] completedDayMonthItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        final ArrayAdapter<Integer> modifyTodoCompletedDayMonthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayMonthItems);
         modifyTodoActualCompletedDayMonth.setAdapter(modifyTodoCompletedDayMonthAdapter);
 
-        Spinner modifyTodoActualCompletedDayDay = (Spinner)findViewById(R.id.modifyTodoActualCompletedDayDay);
-        Integer[] completedDayDayItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
-        ArrayAdapter<Integer> modifyTodoCompletedDayDayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayDayItems);
+        final Spinner modifyTodoActualCompletedDayDay = (Spinner)findViewById(R.id.modifyTodoActualCompletedDayDay);
+        final Integer[] completedDayDayItems = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+        final ArrayAdapter<Integer> modifyTodoCompletedDayDayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, completedDayDayItems);
         modifyTodoActualCompletedDayDay.setAdapter(modifyTodoCompletedDayDayAdapter);
 
 
@@ -142,6 +142,7 @@ public class ModifyTodo extends AppCompatActivity {
         Response.Listener<String> responseListener = new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
+                Log.i("tset",response.toString());
                 try {
                     JSONObject  res = new JSONObject(response);
                     boolean success = res.getBoolean("success");
@@ -157,25 +158,38 @@ public class ModifyTodo extends AppCompatActivity {
                         takeClassYear = r.getString("takeClassYear");
                         takeClassSemester = r.getString("takeClassSemester");
 
+                        Log.i("test", todoName);
+                        Log.i("test", subjectName);
+                        Log.i("test", deadLine);
+                        Log.i("test", actualDeaLine);
+                        Log.i("test", completed);
+                        Log.i("test", importance);
+                        Log.i("test", takeClassSemester);
+                        Log.i("test", takeClassYear);
+
+
+                        int cdy=Integer.parseInt(deadLine.split("\\.")[0]);
+                        int cdm=Integer.parseInt(deadLine.split("\\.")[1]);
+                        int cdd=Integer.parseInt(deadLine.split("\\.")[2]);
+                        int ady=Integer.parseInt(actualDeaLine.split("\\n")[0]);
+                        int adm=Integer.parseInt(actualDeaLine.split("\\n")[1]);
+                        int add=Integer.parseInt(actualDeaLine.split("\\n")[2]);
+
                         editTextModifyTodoContent.setText(todoName);
+                        modifyTodoCompletedDayYear.setSelection(Arrays.binarySearch(deadlineYearItems, cdy));
+                        modifyTodoCompletedDayMonth.setSelection(Arrays.binarySearch(deadlineMonthItems, cdm));
+                        modifyTodoCompletedDayDay.setSelection(Arrays.binarySearch(deadlineDayItems, cdd));
+                        modifyTodoActualCompletedDayYear.setSelection(Arrays.binarySearch(completedDayYearItems, ady));
+                        modifyTodoActualCompletedDayMonth.setSelection(Arrays.binarySearch(completedDayMonthItems, adm));
+                        modifyTodoActualCompletedDayDay.setSelection(Arrays.binarySearch(completedDayDayItems, add));
 
-                        modifySubjectLectureDayOfTheWeek.setSelection(Arrays.binarySearch(lectureDayOfTheWeekItems, subjectDatas.getLectureDayOfTheWeek()));
-                        modifySubjectStartTime.setSelection(Arrays.binarySearch(startTimeItems, subjectDatas.getStartTime()));
-                        modifySubjectEndTime.setSelection(Arrays.binarySearch(endTimeItems, subjectDatas.getEndTime()));
-                        modifySubjectTakeClassYear.setSelection(Arrays.binarySearch(takeClassYearItems, Integer.parseInt(subjectDatas.getTakeClassYear())));
-                        modifySubjectTakeClassSemester.setSelection(Arrays.binarySearch(takeClassSemesterItems, Integer.parseInt(subjectDatas.getTakeClassSemester())));
+                        modifyTodoDeadlineYearAdapter.notifyDataSetChanged();
+                        modifyTodoDeadlineMonthAdapter.notifyDataSetChanged();
+                        modifyTodoDeadlineDayAdapter.notifyDataSetChanged();
+                        modifyTodoCompletedDayYearAdapter.notifyDataSetChanged();
+                        modifyTodoCompletedDayMonthAdapter.notifyDataSetChanged();
+                        modifyTodoCompletedDayDayAdapter.notifyDataSetChanged();
 
-                        EditText subjectName = (EditText) findViewById(R.id.modifySubjectName);
-                        EditText professorName = (EditText) findViewById(R.id.modifySubjectProfessor);
-
-                        subjectName.setText(subjectDatas.getSubjectName());
-                        professorName.setText(subjectDatas.getSubjectProfessor());
-
-                        lectureDayOfTheWeekAdapter.notifyDataSetChanged();
-                        startTimeitemsAdapter.notifyDataSetChanged();
-                        endTimeAdapter.notifyDataSetChanged();
-                        takeClassYearAdapter.notifyDataSetChanged();
-                        takeClassSemesterAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                     }
@@ -186,8 +200,8 @@ public class ModifyTodo extends AppCompatActivity {
         };
         // Add the request to the RequestQueue.
         AllData ad = new AllData();
-        ModifySubjectGetRequest modifySubjectGetRequest = new ModifySubjectGetRequest(ad.getUserId(), subjectName, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(ModifySubject.this);
+        ModifyTodoGetRequest modifySubjectGetRequest = new ModifyTodoGetRequest(userID, todo, subjectName, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ModifyTodo.this);
         queue.add(modifySubjectGetRequest);
 
 
