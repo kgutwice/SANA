@@ -301,10 +301,9 @@ public class ModifySubject extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.subjectList) {
-            Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
+        if (id == R.id.delItem) {
+
+            deleteSubjectToDB(userID, subjectName);
             return true;
         }
 

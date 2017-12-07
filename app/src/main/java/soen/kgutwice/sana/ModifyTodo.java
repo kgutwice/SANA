@@ -35,7 +35,7 @@ import java.util.Map;
 public class ModifyTodo extends AppCompatActivity {
 
     String userID;
-    String subjectName;
+    String todo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,8 @@ public class ModifyTodo extends AppCompatActivity {
 
         final String getUserID = getIntent().getStringExtra("userID");
         userID = getUserID;
-        subjectName = getIntent().getStringExtra("subjectName");
+        final String subjectName = getIntent().getStringExtra("subjectName");
+        todo = getIntent().getStringExtra("todo");
 
         final String no = getIntent().getStringExtra("no");
 
@@ -138,10 +139,9 @@ public class ModifyTodo extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.subjectList) {
-            Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
+        if (id == R.id.delItem) {
+
+            deleteTodoToDB(userID, todo);
             return true;
         }
 
@@ -202,7 +202,7 @@ public class ModifyTodo extends AppCompatActivity {
 
     void deleteTodoToDB(final String userID, final String todo){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/modifyTodo.php";
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/deleteTodo.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
