@@ -59,6 +59,7 @@
         android:id="@+id/importance"
         android:layout_weight="1"
         android:numStars="3"
+        android:stepSize="1"
         />
 
 </LinearLayout>

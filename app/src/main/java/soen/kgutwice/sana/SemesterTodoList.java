@@ -239,10 +239,12 @@ public class SemesterTodoList extends AppCompatActivity {
             for(int i=0; i<dataLength; i++){
                 TodoItem todo = TodoList.get(i);
                 String deadline = todo.getDeadline();
-                String[] yearMonthDay = deadline.split(".");
-                String year = yearMonthDay[0];
-                String month = yearMonthDay[1];
-                String day = yearMonthDay[2];
+
+                Log.i("tt", deadline);
+
+                String year = deadline.split("\\.")[0];
+                String month = deadline.split("\\.")[1];
+                String day = deadline.split("\\.")[2];
                 if (Integer.parseInt(month) < 10){
                     month = "0" + month;
                 }
@@ -293,7 +295,7 @@ public class SemesterTodoList extends AppCompatActivity {
             for(int i=0; i<dataLength; i++){
                 TodoItem todo = TodoList.get(i);
                 String completedDay = todo.getActualCompletedDay();
-                String[] yearMonthDay = completedDay.split(".");
+                String[] yearMonthDay = completedDay.split("\\.");
                 String year = yearMonthDay[0];
                 String month = yearMonthDay[1];
                 String day = yearMonthDay[2];

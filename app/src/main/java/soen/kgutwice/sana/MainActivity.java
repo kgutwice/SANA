@@ -37,7 +37,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         userID = getIntent().getStringExtra("userID");
 
-        Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         final ListView listView;
         TodoAdapter todoAdapter;
@@ -105,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), year + " " + month + " " + dayOfMonth, Toast.LENGTH_LONG).show(); // Example : 2017 10 30
-
                 listView.setAdapter(null);
 
                 TodoAdapter todoAdapter;
@@ -120,6 +116,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        TodoAdapter defaultTodoAdapter;
+        defaultTodoAdapter = new TodoAdapter();
+        listView.setAdapter(defaultTodoAdapter);
+        DecimalFormat df = new DecimalFormat("00");
+        Calendar currentCal = Calendar.getInstance();
+        currentCal.add(currentCal.DATE, 0);
+        String year = Integer.toString(currentCal.get(Calendar.YEAR));
+        String month = df.format(currentCal.get(Calendar.MONTH)+1);
+        String day = df.format(currentCal.get(Calendar.DAY_OF_MONTH));
+
+        Toast.makeText(getApplicationContext(), year+month+day, Toast.LENGTH_LONG).show();
+
+        getTodayTodoFromDB(userID, Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), defaultTodoAdapter);
         getLectureFromDB(userID, "2017", "1");
         getIDandNameandSet(userID);
     }
@@ -221,46 +230,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(mainActivityTodoListRequest);
 
-
     }
 
     void getIDandNameandSet(final String userID){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="아이디와 이름을 요청하는 URL입니다.";
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/getIDandName.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try{
                             JSONObject reader = new JSONObject(response);
-                            String receiveUserID = reader.getString("userID");
-                            String receiveUserName = reader.getString("userName");
-                            TextView idTextView = (TextView)findViewById(R.id.userID);
+                            boolean success = reader.getBoolean("success");
+                            JSONArray data = (JSONArray)reader.get("data");
+                            TextView idTextView = (TextView) findViewById(R.id.userID);
                             TextView nameTextView = (TextView)findViewById(R.id.userName);
-                            idTextView.setText(receiveUserID);
-                            nameTextView.setText(receiveUserName);
+                            if(success) {
+                                JSONObject row = data.getJSONObject(0);
+                                idTextView.setText(row.getString("userID"));
+                                nameTextView.setText(row.getString("userName"));
+                            } else {
 
+                            }
                         } catch(Exception e){
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                }){
+                    @Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("userID", userID);
 
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("userID", userID);
-
-                return params;
-            }
-        };
+                        return params;
+                    }
+                };
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }

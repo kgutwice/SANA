@@ -86,11 +86,7 @@ public class AddTodo extends AppCompatActivity {
         addTodoActualCompletedDayDay.setAdapter(addTodoDayAdapter);
 
 
-        final String todo = editTextAddTodoContent.getText().toString();
-        final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
-        final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
-        final String completed = String.valueOf(checkBoxisCompleted.isChecked());
-        final String importance = String.valueOf(ratingBar.getRating());
+
 
         Button addTodoButton = (Button)findViewById(R.id.addTodoButton);
         addTodoButton.setOnClickListener(new View.OnClickListener(){
@@ -98,6 +94,12 @@ public class AddTodo extends AppCompatActivity {
             public void onClick(View view) {
                 // 데이터 송신
                 //
+                final String todo = editTextAddTodoContent.getText().toString();
+                final String deadline = spinnerDeadlineYear.getSelectedItem().toString() + "." + spinnerDeadlineMonth.getSelectedItem().toString() + "." + spinnerDeadlineDay.getSelectedItem().toString();
+                final String actualCompletedDay = spinnerActualCompletedDayYear.getSelectedItem().toString() + "." + spinnerActualCompletedDayMonth.getSelectedItem().toString() + "." + spinnerActualCompletedDayDay.getSelectedItem().toString();
+                final String completed = String.valueOf(checkBoxisCompleted.isChecked());
+                final String importance = String.valueOf(ratingBar.getRating());
+
                 Log.i("testtesttest", userID+ todo+ subjectName+ deadline+ actualCompletedDay+ completed+ importance);
                 addTodoToDB(userID, todo, subjectName, deadline, actualCompletedDay, completed, importance, ClassYear, ClassSemester);
 
