@@ -81,8 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         intent.putExtra("userID", userID);
                         TodoItem todoItem = (TodoItem)parent.getAdapter().getItem(i);
                         String subjectName = todoItem.getSubject();
+                        String todo = todoItem.getTodo();
                         String no = todoItem.getNo();
                         intent.putExtra("no", no);
+                        intent.putExtra("todo", todo);
                         intent.putExtra("subjectName", subjectName);
                         startActivity(intent);
                     }
