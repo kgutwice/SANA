@@ -84,11 +84,11 @@ public class SubjectList extends AppCompatActivity {
             }
         };
         //여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음
-        SubjectListRequest subjectoListRequest = new SubjectListRequest(userID,"2017","2",responseListener);
+        //SubjectListRequest subjectoListRequest = new SubjectListRequest(userID,"2017","2",responseListener);
         //여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음
 
-        RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
-        queue.add(subjectoListRequest);
+//        RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
+//        queue.add(subjectoListRequest);
 
 //        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 //        ListView subjectListView = (ListView)findViewById(R.id.subjectListView);

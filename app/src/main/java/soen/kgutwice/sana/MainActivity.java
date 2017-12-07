@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toast.makeText(getApplicationContext(), year+month+day, Toast.LENGTH_LONG).show();
 
         getTodayTodoFromDB(userID, Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day), defaultTodoAdapter);
-        getLectureFromDB(userID, "2017", "1");
+        getLectureFromDB(userID, "2017", "2");
         getIDandNameandSet(userID);
     }
 
