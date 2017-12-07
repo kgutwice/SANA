@@ -86,9 +86,10 @@ public class SubjectAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String subjectName, String professorName, String courseTime, String ClassYear, String ClassSemester) {
+    public void addItem(String no, String subjectName, String professorName, String courseTime, String ClassYear, String ClassSemester) {
         SubjectItem item = new SubjectItem();
 
+        item.setNo(no);
         item.setSubjectName(subjectName);
         item.setSubjectProfessor(professorName);
         item.setSubjectcourseTime(courseTime);

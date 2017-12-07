@@ -6,11 +6,16 @@ package soen.kgutwice.sana;
 
 public class SubjectItem {
 
+    String no;
     String subjectName;
     String subjectProfessor;
     String subjectcourseTime;
     String ClassYear;
     String ClassSemester;
+
+    public void setNo(String no){this.no = no; }
+
+    public String getNo() { return no; }
 
     public String getClassYear(){ return ClassYear; };
 

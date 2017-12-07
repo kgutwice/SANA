@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class SubjectList extends AppCompatActivity {
 
     public static String userID;
+
     private ArrayAdapter adapter;
 
     @Override
@@ -57,7 +58,7 @@ public class SubjectList extends AppCompatActivity {
                             JSONObject d = data.getJSONObject(i);
                             Log.i("tt", d.toString());
                             String courseTime = "" + d.getString("lectureDayOfTheWeek") + "요일, " + d.getString("startTime") + " ~ " + d.getString("endTime");
-                            subjectAdapter.addItem(d.getString("subjectName"), d.getString("subjectProfessor"), courseTime, d.getString("takeClassYear"), d.getString("takeClassSemester"));
+                            subjectAdapter.addItem(d.getString("no"), d.getString("subjectName"), d.getString("subjectProfessor"), courseTime, d.getString("takeClassYear"), d.getString("takeClassSemester"));
                         }
                         subjectAdapter.notifyDataSetChanged();
                         Log.i("test", subjectAdapter.toString());
@@ -69,8 +70,9 @@ public class SubjectList extends AppCompatActivity {
                 }
             }
         };
-
-        SubjectListRequest subjectoListRequest = new SubjectListRequest(userID,"2017","1",responseListener);
+        //여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음
+        SubjectListRequest subjectoListRequest = new SubjectListRequest(userID,"2017","2",responseListener);
+        //여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음//여기 스태틱으로 박아넣었음
 
         RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
         queue.add(subjectoListRequest);
@@ -97,21 +99,27 @@ public class SubjectList extends AppCompatActivity {
                 }
         );
 
-//        Button modifyButton = (Button)findViewById(R.id.modifySubject);
-//        modifyButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                View parentRow = (View)view.getParent();
-//                ListView listView = (ListView)parentRow.getParent();
-//                final int position = listView.getPositionForView(parentRow);
-//
-//                Intent intent = new Intent(getApplicationContext(), ModifySubject.class);
-//                intent.putExtra("userID", userID);
-//                SubjectItem subjectItem = (SubjectItem)listView.getAdapter().getItem(position);
-//                String subjectName = subjectItem.getSubjectName();
-//                intent.putExtra("subjectName", subjectName);
-//            }
-//        });
+        Button modifyButton = (Button)findViewById(R.id.modifySubject);
+        modifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View parentRow = (View)view.getParent();
+                ListView listView = (ListView)parentRow.getParent();
+                final int position = listView.getPositionForView(parentRow);
+
+                Intent intent = new Intent(getApplicationContext(), ModifySubject.class);
+                intent.putExtra("userID", userID);
+                SubjectItem subjectItem = (SubjectItem)listView.getAdapter().getItem(position);
+                String no = subjectItem.getNo();
+                String subjectName = subjectItem.getSubjectName();
+                String ClassYear = subjectItem.getClassYear();
+                String ClassSemester = subjectItem.getClassSemester();
+                intent.putExtra("no", no);
+                intent.putExtra("subjectName", subjectName);
+                intent.putExtra("ClassYear", ClassYear);
+                intent.putExtra("ClassSemester", ClassSemester);
+            }
+        });
     }
 
     @Override

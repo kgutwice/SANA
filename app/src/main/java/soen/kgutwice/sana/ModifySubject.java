@@ -37,8 +37,8 @@ public class ModifySubject extends AppCompatActivity {
         setContentView(R.layout.activity_modify_subject);
 
         //userID = getIntent().getStringExtra("userID");
-        String asdf = getIntent().getStringExtra("subjectName");
-        Toast.makeText(getApplicationContext(), asdf, Toast.LENGTH_LONG).show();
+        //String asdf = getIntent().getStringExtra("subjectName");
+        //Toast.makeText(getApplicationContext(), asdf, Toast.LENGTH_LONG).show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,7 +94,49 @@ public class ModifySubject extends AppCompatActivity {
                 modifySubjectToDB(userID, subjectName, subjectProfessor, lectureDayOfTheWeek, startTime, endTime, takeClassYear, takeClassSemester);
             }
         });
+
+
+
+        //데이터 가죠오기
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/modifySubject.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject reader = new JSONObject(response);
+                            boolean success = reader.getBoolean("success");
+                            if(success) {
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                            }
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("userID", userID);
+                params.put("subjectName", subjectName);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
+
 
 
     @Override
@@ -124,7 +166,7 @@ public class ModifySubject extends AppCompatActivity {
 
     void modifySubjectToDB(final String userID, final String subjectName, final String subjectProfessor, final String lectureDayOfTheWeek, final String startTime, final String endTime, final String takeClassYear, final String takeClassSemester){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/modifySubject.php";
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/getLecture.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -152,16 +194,12 @@ public class ModifySubject extends AppCompatActivity {
         }){
             @Override
             protected Map<String,String> getParams(){
+                Intent intent = getIntent();
+                String no = intent.getStringExtra("no");
                 Map<String,String> params = new HashMap<String, String>();
+                params.put("no", no);
                 params.put("userID", userID);
                 params.put("subjectName", subjectName);
-                params.put("subjectProfessor", subjectProfessor);
-                params.put("lectureDayOfTheWeek", lectureDayOfTheWeek);
-                params.put("startTime", startTime);
-                params.put("endTime", endTime);
-                params.put("takeClassYear", takeClassYear);
-                params.put("takeClassSemester", takeClassSemester);
-
                 return params;
             }
         };
