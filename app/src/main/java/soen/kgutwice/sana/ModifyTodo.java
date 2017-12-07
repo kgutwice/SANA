@@ -153,8 +153,7 @@ public class ModifyTodo extends AppCompatActivity {
                             JSONObject reader = new JSONObject(response);
                             boolean success = reader.getBoolean("success");
                             if(success) {
-                                Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                             }
@@ -187,4 +186,43 @@ public class ModifyTodo extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    void deleteTodoToDB(final String userID, final String todo){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://203.249.17.196:2013/ms/android/SANA_connector/modifyTodo.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject reader = new JSONObject(response);
+                            boolean success = reader.getBoolean("success");
+                            if(success) {
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                            }
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("userID", userID);
+                params.put("todo", todo);
+
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
 }

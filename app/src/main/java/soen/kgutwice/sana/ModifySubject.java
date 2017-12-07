@@ -169,7 +169,7 @@ public class ModifySubject extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    void deleteSubjectToDB(final String userID, final String subjectName, final String subjectProfessor, final String lectureDayOfTheWeek, final String startTime, final String endTime, final String takeClassYear, final String takeClassSemester){
+    void deleteSubjectToDB(final String userID, final String subjectName){
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://203.249.17.196:2013/ms/android/SANA_connector/modifySubject.php";
 
@@ -181,8 +181,7 @@ public class ModifySubject extends AppCompatActivity {
                             JSONObject reader = new JSONObject(response);
                             boolean success = reader.getBoolean("success");
                             if(success) {
-                                Intent intent = new Intent(getApplicationContext(), SubjectList.class);
-                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
                             }
@@ -202,12 +201,6 @@ public class ModifySubject extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("userID", userID);
                 params.put("subjectName", subjectName);
-                params.put("subjectProfessor", subjectProfessor);
-                params.put("lectureDayOfTheWeek", lectureDayOfTheWeek);
-                params.put("startTime", startTime);
-                params.put("endTime", endTime);
-                params.put("takeClassYear", takeClassYear);
-                params.put("takeClassSemester", takeClassSemester);
 
                 return params;
             }
