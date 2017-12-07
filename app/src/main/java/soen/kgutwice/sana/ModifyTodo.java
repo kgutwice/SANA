@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,17 @@ public class ModifyTodo extends AppCompatActivity {
 
     String userID;
     String todo;
+    String subjectName;
+    String todoName;
+    String deadLine;
+    String actualDeaLine;
+    String completed;
+    String importance;
+    String takeClassYear;
+    String takeClassSemester;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +61,7 @@ public class ModifyTodo extends AppCompatActivity {
 
         final String getUserID = getIntent().getStringExtra("userID");
         userID = getUserID;
-        final String subjectName = getIntent().getStringExtra("subjectName");
+        subjectName = getIntent().getStringExtra("subjectName");
         todo = getIntent().getStringExtra("todo");
 
         final String no = getIntent().getStringExtra("no");
@@ -122,6 +134,64 @@ public class ModifyTodo extends AppCompatActivity {
                 modifyTodoToDB(no, userID, todo, subjectName, deadline, actualCompletedDay, completed, importance, "2017", "2");
             }
         });
+
+
+
+
+
+        Response.Listener<String> responseListener = new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject  res = new JSONObject(response);
+                    boolean success = res.getBoolean("success");
+                    JSONArray data = (JSONArray)res.get("data");
+                    if(success){
+                        JSONObject r = data.getJSONObject(0);
+                        todoName = r.getString("todoName");
+                        subjectName = r.getString("subjectName");
+                        deadLine = r.getString("deadLine");
+                        actualDeaLine = r.getString("actualDeadLine");
+                        completed = r.getString("completed");
+                        importance = r.getString("importance");
+                        takeClassYear = r.getString("takeClassYear");
+                        takeClassSemester = r.getString("takeClassSemester");
+
+                        editTextModifyTodoContent.setText(todoName);
+
+                        modifySubjectLectureDayOfTheWeek.setSelection(Arrays.binarySearch(lectureDayOfTheWeekItems, subjectDatas.getLectureDayOfTheWeek()));
+                        modifySubjectStartTime.setSelection(Arrays.binarySearch(startTimeItems, subjectDatas.getStartTime()));
+                        modifySubjectEndTime.setSelection(Arrays.binarySearch(endTimeItems, subjectDatas.getEndTime()));
+                        modifySubjectTakeClassYear.setSelection(Arrays.binarySearch(takeClassYearItems, Integer.parseInt(subjectDatas.getTakeClassYear())));
+                        modifySubjectTakeClassSemester.setSelection(Arrays.binarySearch(takeClassSemesterItems, Integer.parseInt(subjectDatas.getTakeClassSemester())));
+
+                        EditText subjectName = (EditText) findViewById(R.id.modifySubjectName);
+                        EditText professorName = (EditText) findViewById(R.id.modifySubjectProfessor);
+
+                        subjectName.setText(subjectDatas.getSubjectName());
+                        professorName.setText(subjectDatas.getSubjectProfessor());
+
+                        lectureDayOfTheWeekAdapter.notifyDataSetChanged();
+                        startTimeitemsAdapter.notifyDataSetChanged();
+                        endTimeAdapter.notifyDataSetChanged();
+                        takeClassYearAdapter.notifyDataSetChanged();
+                        takeClassSemesterAdapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                    }
+                } catch(JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        // Add the request to the RequestQueue.
+        AllData ad = new AllData();
+        ModifySubjectGetRequest modifySubjectGetRequest = new ModifySubjectGetRequest(ad.getUserId(), subjectName, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ModifySubject.this);
+        queue.add(modifySubjectGetRequest);
+
+
+
     }
 
     @Override

@@ -49,6 +49,7 @@ public class SemesterTodoList extends AppCompatActivity {
         setContentView(R.layout.activity_todo_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        AllData ad = (AllData)getApplication();
 
         userID = getIntent().getStringExtra("userID");
 
@@ -114,8 +115,8 @@ public class SemesterTodoList extends AppCompatActivity {
                 }
             }
         };
-
-        SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID,"2017","1",responseListener);
+        Log.i("test", Integer.toString(ad.getDontLookPastEventChecked()));
+        SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID,"2017","2", Integer.toString(ad.getDontLookPastEventChecked()) ,responseListener);
 
         RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
         queue.add(semesterTodoListRequest);
@@ -139,13 +140,13 @@ public class SemesterTodoList extends AppCompatActivity {
         );
 
         askYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
+            AllData ad = (AllData)getApplication();
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String year = askYear.getSelectedItem().toString();
                 String semester = askSemester.getSelectedItem().toString();
 
-                SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID, year, semester, responseListener);
+                SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID, year, semester,Integer.toString(ad.getDontLookPastEventChecked()), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
                 queue.add(semesterTodoListRequest);
             }
@@ -158,13 +159,13 @@ public class SemesterTodoList extends AppCompatActivity {
 
 
         askSemester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
+            AllData ad = (AllData)getApplication();
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String year = askYear.getSelectedItem().toString();
                 String semester = askSemester.getSelectedItem().toString();
 
-                SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID, year, semester, responseListener);
+                SemesterTodoListRequest semesterTodoListRequest = new SemesterTodoListRequest(userID, year, semester,Integer.toString(ad.getDontLookPastEventChecked()), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(SemesterTodoList.this);
                 queue.add(semesterTodoListRequest);
             }

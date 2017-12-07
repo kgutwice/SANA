@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void getTodayTodoFromDB(final String userID, final int year, final int month, final int day, final TodoAdapter todoAdapter){
+        AllData ad = (AllData)getApplication();
         final HashMap<String, Object> todo = new HashMap<String, Object>();
         final ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-        MainActivityTodoListRequest mainActivityTodoListRequest = new MainActivityTodoListRequest(userID, deadLine, responseListener);
+        MainActivityTodoListRequest mainActivityTodoListRequest = new MainActivityTodoListRequest(userID, deadLine,Integer.toString(ad.getDontLookPastEventChecked()), responseListener);
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(mainActivityTodoListRequest);
