@@ -29,8 +29,6 @@ public class SubjectList extends AppCompatActivity {
     public static String userID;
     private ArrayAdapter adapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +70,7 @@ public class SubjectList extends AppCompatActivity {
             }
         };
 
-        SubjectListRequest subjectoListRequest = new SubjectListRequest("sms2831","2017","1",responseListener);
+        SubjectListRequest subjectoListRequest = new SubjectListRequest(userID,"2017","1",responseListener);
 
         RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
         queue.add(subjectoListRequest);

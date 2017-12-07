@@ -1,10 +1,12 @@
 package soen.kgutwice.sana;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -50,9 +52,23 @@ public class SubjectAdapter extends BaseAdapter {
         SubjectItem subjectItem = subjectItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
+
+        final String subjectName = subjectItem.getSubjectName();
+
         subjectTextView.setText(subjectItem.getSubjectName());
         professorTextView.setText(subjectItem.getSubjectProfessor());
         courseTimeTextView.setText(subjectItem.getSubjectcourseTime());
+
+        final Button modifySubject = (Button)convertView.findViewById(R.id.modifySubject);
+        modifySubject.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ModifySubject.class);
+                //intent.putExtra("userID", userID);
+                intent.putExtra("subjectName", subjectName);
+                context.startActivity(intent);
+            }
+        });
 
         return convertView;
     }
