@@ -98,7 +98,7 @@ public class ModifySubject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_subject);
 
-        userID = getIntent().getStringExtra("userID");
+        AllData ad = (AllData)getApplication();
         Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
         subjectName = getIntent().getStringExtra("subjectName");
         //Toast.makeText(getApplicationContext(), asdf, Toast.LENGTH_LONG).show();
@@ -113,13 +113,13 @@ public class ModifySubject extends AppCompatActivity {
         modifySubjectLectureDayOfTheWeek.setAdapter(lectureDayOfTheWeekAdapter);
 
         final Spinner modifySubjectStartTime =(Spinner)findViewById(R.id.modifySubjectStartTime);
-        final String[] startTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00"};
+        final String[] startTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"};
         final ArrayAdapter<String> startTimeitemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, startTimeItems);
         modifySubjectStartTime.setAdapter(startTimeitemsAdapter);
         // 되돌아가게? 원형으로?
 
         final Spinner modifySubjectEndTime =(Spinner)findViewById(R.id.modifySubjectEndTime);
-        final String[] endTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00"};
+        final String[] endTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"};
         final ArrayAdapter<String> endTimeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, endTimeItems);
         modifySubjectEndTime.setAdapter(endTimeAdapter);
 
@@ -138,6 +138,7 @@ public class ModifySubject extends AppCompatActivity {
         modifySubjectButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                AllData ad = (AllData) getApplication();
                 if(subjectDatas == null)
                     return;
                 EditText msubjectnName = (EditText)findViewById(R.id.modifySubjectName);
@@ -151,7 +152,7 @@ public class ModifySubject extends AppCompatActivity {
                 Log.i("test", msubjectnName.getText().toString());
                 Log.i("test", msubjectProfessor.getText().toString());
 
-                modifySubjectToDB(userID, subjectName, msubjectnName.getText().toString(), msubjectProfessor.getText().toString(), mlectureDayOfTheWeek, mstartTime, mendTime, mtakeClassYear, mtakeClassSemester);
+                modifySubjectToDB(ad.getUserId(), subjectName, msubjectnName.getText().toString(), msubjectProfessor.getText().toString(), mlectureDayOfTheWeek, mstartTime, mendTime, mtakeClassYear, mtakeClassSemester);
             }
         });
 
@@ -211,7 +212,7 @@ public class ModifySubject extends AppCompatActivity {
             }
         };
         // Add the request to the RequestQueue.
-        AllData ad = new AllData();
+
         ModifySubjectGetRequest modifySubjectGetRequest = new ModifySubjectGetRequest(ad.getUserId(), subjectName, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ModifySubject.this);
         queue.add(modifySubjectGetRequest);

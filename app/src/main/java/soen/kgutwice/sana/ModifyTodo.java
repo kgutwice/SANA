@@ -150,7 +150,6 @@ public class ModifyTodo extends AppCompatActivity {
                     if(success){
                         JSONObject r = data.getJSONObject(0);
                         todoName = r.getString("todoName");
-                        subjectName = r.getString("subjectName");
                         deadLine = r.getString("deadLine");
                         actualDeaLine = r.getString("actualDeadLine");
                         completed = r.getString("completed");
@@ -167,13 +166,13 @@ public class ModifyTodo extends AppCompatActivity {
                         Log.i("test", takeClassSemester);
                         Log.i("test", takeClassYear);
 
-
+                        Log.i("dd",deadLine.split("\\.")[0]);
                         int cdy=Integer.parseInt(deadLine.split("\\.")[0]);
                         int cdm=Integer.parseInt(deadLine.split("\\.")[1]);
                         int cdd=Integer.parseInt(deadLine.split("\\.")[2]);
-                        int ady=Integer.parseInt(actualDeaLine.split("\\n")[0]);
-                        int adm=Integer.parseInt(actualDeaLine.split("\\n")[1]);
-                        int add=Integer.parseInt(actualDeaLine.split("\\n")[2]);
+                        int ady=Integer.parseInt(actualDeaLine.split("\\.")[0]);
+                        int adm=Integer.parseInt(actualDeaLine.split("\\.")[1]);
+                        int add=Integer.parseInt(actualDeaLine.split("\\.")[2]);
 
                         editTextModifyTodoContent.setText(todoName);
                         modifyTodoCompletedDayYear.setSelection(Arrays.binarySearch(deadlineYearItems, cdy));
