@@ -97,7 +97,7 @@ public class TodoAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String todo, String subject, String deadline, String actualCompletedDay, boolean completed, float importance) {
+    public void addItem(String todo, String subject, String deadline, String actualCompletedDay, boolean completed, float importance, int classYear, int classSemester) {
         TodoItem item = new TodoItem();
 
         item.setTodo(todo);
@@ -106,7 +106,8 @@ public class TodoAdapter extends BaseAdapter {
         item.setActualCompletedDay(actualCompletedDay);
         item.setCompleted(completed);
         item.setImportance(importance);
-
+        item.setClassYear(classYear);
+        item.setClassSemester(classSemester);
         todoItemList.add(item);
     }
 }

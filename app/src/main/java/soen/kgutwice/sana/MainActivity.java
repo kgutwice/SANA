@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             JSONObject d = data.getJSONObject(i);
                             //todoAdapter.addItem("testtodo","testSubject", "testDeadline", "testActualDeadline", false, 2);
 
-                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"));
+                            todoAdapter.addItem(d.getString("todoName"), d.getString("subjectName"), d.getString("deadLine"), d.getString("actualDeadLine"),d.getBoolean("completed"), d.getInt("importance"),d.getInt("takeClassYear"), d.getInt("takeClassSemester"));
 
                         }
                         todoAdapter.notifyDataSetChanged();
