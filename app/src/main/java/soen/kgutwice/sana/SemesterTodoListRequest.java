@@ -16,12 +16,14 @@ public class SemesterTodoListRequest extends StringRequest {
 
     private Map<String, String> parameters;
 
-    public SemesterTodoListRequest(String userId, String takeClassYear, String takeClassSemeter, Response.Listener<String> listener){
+    public SemesterTodoListRequest(String userId, String takeClassYear, String takeClassSemeter,String lastPlan, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
+
         parameters = new HashMap<>();
         parameters.put("userID", userId);
         parameters.put("takeClassYear", takeClassYear);
         parameters.put("takeClassSemester", takeClassSemeter);
+        parameters.put("lastPlan", lastPlan);
     }
 
     @Override

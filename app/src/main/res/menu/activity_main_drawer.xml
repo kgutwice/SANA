@@ -16,13 +16,6 @@
         </item>
     </group>
 
-    <group
-        android:id="@+id/menu_middle">
-
-        <item
-            android:title="듣고있는 과목" >
-        </item>
-    </group>
 
 
 
