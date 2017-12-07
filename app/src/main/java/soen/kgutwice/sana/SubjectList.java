@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -27,8 +28,8 @@ import java.util.ArrayList;
 public class SubjectList extends AppCompatActivity {
 
     public static String userID;
-
     private ArrayAdapter adapter;
+    Response.Listener<String> responseListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +40,32 @@ public class SubjectList extends AppCompatActivity {
         userID = intent.getStringExtra("userID");
         Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_LONG).show();
 
-        ListView listView;
-        final SubjectAdapter subjectAdapter;
-        subjectAdapter = new SubjectAdapter();
+        final ListView listView = (ListView)findViewById(R.id.subjectListView);
 
-        listView = (ListView)findViewById(R.id.subjectListView);
-        listView.setAdapter(subjectAdapter);
 
-        Response.Listener<String> responseListener = new Response.Listener<String>(){
+        final Spinner askYear = (Spinner)findViewById(R.id.askYear);
+        Integer[] YearItems = new Integer[]{2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026};
+        ArrayAdapter<Integer> YearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, YearItems);
+        askYear.setAdapter(YearAdapter);
+
+        final Spinner askSemester = (Spinner)findViewById(R.id.askSemester);
+        Integer[] SemesterItems = new Integer[]{1, 2};
+        ArrayAdapter<Integer> SemesterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, SemesterItems);
+        askSemester.setAdapter(SemesterAdapter);
+
+        responseListener = new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
                 try {
                     JSONObject jsonResponse = new JSONObject(s);
                     boolean success = jsonResponse.getBoolean("success");
                     JSONArray data = (JSONArray)jsonResponse.get("data");
+
+                    listView.setAdapter(null);
+                    final SubjectAdapter subjectAdapter;
+                    subjectAdapter = new SubjectAdapter();
+                    listView.setAdapter(subjectAdapter);
+
                     if(success) {
                         for(int i=0; i<data.length(); i++) {
                             JSONObject d = data.getJSONObject(i);
@@ -63,7 +76,7 @@ public class SubjectList extends AppCompatActivity {
                         subjectAdapter.notifyDataSetChanged();
                         Log.i("test", subjectAdapter.toString());
                     } else {
-                        Toast.makeText(getApplicationContext(), "요청이 실패했습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "불러올 과목이 없습니다.", Toast.LENGTH_LONG).show();
                     }
                 } catch(JSONException e) {
                     e.printStackTrace();
@@ -122,6 +135,43 @@ public class SubjectList extends AppCompatActivity {
             }
         });
         */
+
+        askYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String year = askYear.getSelectedItem().toString();
+                String semester = askSemester.getSelectedItem().toString();
+
+                SubjectListRequest subjectListRequest = new SubjectListRequest(userID, year, semester, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
+                queue.add(subjectListRequest);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        askSemester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String year = askYear.getSelectedItem().toString();
+                String semester = askSemester.getSelectedItem().toString();
+
+                SubjectListRequest subjectListRequest = new SubjectListRequest(userID, year, semester, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(SubjectList.this);
+                queue.add(subjectListRequest);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override
