@@ -40,13 +40,13 @@ public class AddSubject extends AppCompatActivity {
         lectureDayOfTheWeek.setAdapter(lectureDayOfTheWeekAdapter);
 
         Spinner startTime =(Spinner)findViewById(R.id.addSubjectStartTime);
-        String[] startTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00"};
+        String[] startTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"};
         ArrayAdapter<String> startTimeitemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, startTimeItems);
         startTime.setAdapter(startTimeitemsAdapter);
         // 되돌아가게? 원형으로?
 
         Spinner endTime =(Spinner)findViewById(R.id.addSubjectEndTime);
-        String[] endTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00"};
+        String[] endTimeItems = new String[]{"00:00", "01:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"};
         ArrayAdapter<String> endTimeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, endTimeItems);
         endTime.setAdapter(endTimeAdapter);
 

@@ -132,6 +132,7 @@ public class SubjectList extends AppCompatActivity {
             return true;
         } else if(id == R.id.addFromKutis){
             // 이곳은 쿠티스와 연동하는 곳입니다.
+
         }
 
         return super.onOptionsItemSelected(item);
